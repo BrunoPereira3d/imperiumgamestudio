@@ -18,7 +18,7 @@ export default function OutsourcingSection() {
       <div className="absolute inset-0 z-0">
         <img
           src={OUTSOURCING_URL}
-          alt=""
+          alt="Outsourcing de qualidade para estúdios de games e empresas"
           className="w-full h-full object-cover opacity-15"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/95 to-[#0a0a0a]" />

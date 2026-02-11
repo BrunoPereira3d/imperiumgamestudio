@@ -18,7 +18,7 @@ export default function HeroSection() {
       >
         <img
           src={HERO_BG_URL}
-          alt=""
+          alt="Imperium Game Studio - Estúdio de Desenvolvimento de Games e 3D"
           className="w-full h-[120%] object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]" />
