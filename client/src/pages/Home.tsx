@@ -19,6 +19,7 @@ export default function Home() {
       <Navbar />
       <main className="relative z-10">
         <HeroSection />
+        <ServicesSection />
         <ProjectsSection />
         <OutsourcingSection />
         <PortfolioSection />
