@@ -1,13 +1,17 @@
 // DESIGN: Cinematic Dark Forge — Services section with interactive cards
-// 6 cards with hover glow effect, images, and red accent borders
+// 6 cards with parallax and fade-in animations on images, hover glow effect, and red accent borders
 
 import { motion } from "framer-motion";
 import { Gamepad2, Box, Film, Printer, Smartphone, Headphones } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useMotionValue, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { SERVICES } from "@/lib/constants";
 
 function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: number }) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [imageY, setImageY] = useState(0);
 
   // Map icon names to Lucide components
   const iconMap: { [key: string]: any } = {
@@ -21,6 +25,18 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
 
   const IconComponent = iconMap[service.icon] || Gamepad2;
 
+  // Handle parallax effect on mouse move
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!imageRef.current) return;
+    const rect = imageRef.current.getBoundingClientRect();
+    const y = (e.clientY - rect.top) / rect.height;
+    setImageY((y - 0.5) * 20); // 20px max parallax
+  };
+
+  const handleMouseLeave = () => {
+    setImageY(0);
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -28,40 +44,72 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
       animate={isVisible ? { y: 0, opacity: 1 } : {}}
       transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
       className="group relative"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="relative bg-[#111111] border border-white/5 rounded-sm overflow-hidden transition-all duration-500 hover:border-[#c61331]/30 hover:shadow-[0_0_40px_rgba(198,19,49,0.08)]">
-        {/* Image or gradient header */}
-        <div className="relative h-48 overflow-hidden">
+        {/* Image or gradient header with parallax */}
+        <div className="relative h-48 overflow-hidden" ref={imageRef}>
           {service.image ? (
             <>
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              <motion.div
+                className="w-full h-full"
+                animate={{ y: imageY }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                <motion.img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ duration: 0.8, delay: index * 0.15 + 0.2 }}
+                />
+              </motion.div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent"
+                initial={{ opacity: 0 }}
+                animate={isVisible ? { opacity: 1 } : {}}
+                transition={{ duration: 0.8, delay: index * 0.15 + 0.3 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent" />
             </>
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] flex items-center justify-center">
-              <IconComponent size={48} className="text-[#c61331]/20" />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+              >
+                <IconComponent size={48} className="text-[#c61331]/20" />
+              </motion.div>
             </div>
           )}
 
-          {/* Icon badge */}
-          <div className="absolute top-4 right-4 w-10 h-10 bg-[#c61331] flex items-center justify-center rounded-sm shadow-[0_0_20px_rgba(198,19,49,0.3)]">
+          {/* Icon badge with fade-in */}
+          <motion.div
+            className="absolute top-4 right-4 w-10 h-10 bg-[#c61331] flex items-center justify-center rounded-sm shadow-[0_0_20px_rgba(198,19,49,0.3)]"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
+          >
             <IconComponent size={20} className="text-white" />
-          </div>
+          </motion.div>
         </div>
 
-        {/* Content */}
-        <div className="p-6">
+        {/* Content with fade-in */}
+        <motion.div
+          className="p-6"
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: index * 0.15 + 0.3 }}
+        >
           <h3 className="text-xl font-bold text-white font-[Orbitron] tracking-wide">
             {service.title}
           </h3>
           <p className="mt-3 text-white/60 leading-relaxed font-[Rajdhani] text-base">
             {service.description}
           </p>
-        </div>
+        </motion.div>
 
         {/* Bottom accent line */}
         <div className="h-[2px] w-0 bg-gradient-to-r from-[#c61331] to-[#c61331]/0 transition-all duration-500 group-hover:w-full" />
