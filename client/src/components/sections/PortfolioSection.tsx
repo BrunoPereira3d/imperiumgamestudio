@@ -1,14 +1,28 @@
 // DESIGN: Cinematic Dark Forge — Portfolio Section with lightbox gallery
-// Showcase of completed works with full-screen image preview
+// Showcase of completed works with full-screen image preview and hover description
 
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
 import { PORTFOLIO_WORKS } from "@/lib/constants";
 import ImageLightbox from "@/components/ImageLightbox";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function PortfolioSection() {
   const [selectedWork, setSelectedWork] = useState<number | null>(null);
+  const { language } = useLanguage();
+
+  const getTitle = () => {
+    if (language === "en") return "Portfolio";
+    if (language === "es") return "Portafolio";
+    return "Portfólio";
+  };
+
+  const getSubtitle = () => {
+    if (language === "en") return "Completed Works";
+    if (language === "es") return "Trabajos Realizados";
+    return "Trabalhos Realizados";
+  };
 
   return (
     <section id="portfolio" className="relative py-24 bg-[#0a0a0a] overflow-hidden">
@@ -27,12 +41,12 @@ export default function PortfolioSection() {
           className="mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-[Orbitron]">
-            Portfólio
+            {getTitle()}
           </h2>
           <div className="flex items-center gap-4">
             <div className="w-16 h-1 bg-[#C61331]" />
             <p className="text-white/60 font-[Rajdhani] tracking-wider uppercase text-sm">
-              Trabalhos Realizados
+              {getSubtitle()}
             </p>
           </div>
         </motion.div>
@@ -57,7 +71,9 @@ export default function PortfolioSection() {
                     alt={work.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
+                  {/* Dark blur overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm" />
 
                   {/* Lightbox Button */}
                   <button
@@ -76,6 +92,18 @@ export default function PortfolioSection() {
                       {work.category}
                     </span>
                   </div>
+
+                  {/* Description Hover Effect - Slides up from bottom */}
+                  <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+                  >
+                    <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
+                      {work.description}
+                    </p>
+                  </motion.div>
                 </div>
 
                 {/* Content */}

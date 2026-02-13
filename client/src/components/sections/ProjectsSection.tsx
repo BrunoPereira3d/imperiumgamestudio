@@ -1,34 +1,27 @@
-// DESIGN: Cinematic Dark Forge — Projects Section with game cards and AI mission generator
-// Features game cards with lightbox preview and AI-powered mission generation
+// DESIGN: Cinematic Dark Forge — Projects Section with game cards
+// Features game cards with lightbox preview and hover description effect
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Zap, Maximize2 } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
 import ImageLightbox from "@/components/ImageLightbox";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const [generatingMission, setGeneratingMission] = useState<number | null>(null);
-  const [generatedMission, setGeneratedMission] = useState<{ [key: number]: string }>({});
+  const { language } = useLanguage();
 
-  const generateMission = async (projectId: number) => {
-    setGeneratingMission(projectId);
-    
-    // Simular geração de missão via IA
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const missions = [
-      "Defenda a necrópole contra 50 aldeões em 3 ondas. Recompensa: 500 ouro",
-      "Construa 5 torres defensivas em 2 minutos. Recompensa: Acesso ao nível 5",
-      "Derrote o líder dos aldeões sem perder um monstro. Recompensa: Personagem exclusivo",
-      "Sobreviva por 10 minutos no modo infinito. Recompensa: 1000 pontos de experiência",
-      "Encontre 3 anomalias escondidas no corredor. Recompensa: Desbloqueio de área secreta",
-    ];
-    
-    const randomMission = missions[Math.floor(Math.random() * missions.length)];
-    setGeneratedMission(prev => ({ ...prev, [projectId]: randomMission }));
-    setGeneratingMission(null);
+  const getTitle = () => {
+    if (language === "en") return "Our Projects";
+    if (language === "es") return "Nuestros Proyectos";
+    return "Nossos Projetos";
+  };
+
+  const getSubtitle = () => {
+    if (language === "en") return "Games in Development";
+    if (language === "es") return "Juegos en Desarrollo";
+    return "Games em Desenvolvimento";
   };
 
   return (
@@ -48,12 +41,12 @@ export default function ProjectsSection() {
           className="mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-[Orbitron]">
-            Nossos Projetos
+            {getTitle()}
           </h2>
           <div className="flex items-center gap-4">
             <div className="w-16 h-1 bg-[#C61331]" />
             <p className="text-white/60 font-[Rajdhani] tracking-wider uppercase text-sm">
-              Games em Desenvolvimento
+              {getSubtitle()}
             </p>
           </div>
         </motion.div>
@@ -77,7 +70,9 @@ export default function ProjectsSection() {
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
+                  {/* Dark blur overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm" />
 
                   {/* Lightbox Button */}
                   <button
@@ -93,6 +88,18 @@ export default function ProjectsSection() {
                       {project.status}
                     </span>
                   </div>
+
+                  {/* Description Hover Effect - Slides up from bottom */}
+                  <motion.div
+                    initial={{ y: 100, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+                  >
+                    <p className="text-white/90 text-sm leading-relaxed font-[Rajdhani]">
+                      {project.description}
+                    </p>
+                  </motion.div>
                 </div>
 
                 {/* Content */}
@@ -106,35 +113,9 @@ export default function ProjectsSection() {
                     </p>
                   </div>
 
-                  <p className="text-white/70 text-sm leading-relaxed mb-6 font-[Rajdhani]">
+                  <p className="text-white/70 text-sm leading-relaxed font-[Rajdhani]">
                     {project.description}
                   </p>
-
-                  {/* Generated Mission */}
-                  {generatedMission[project.id] && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="mb-4 p-3 bg-[#C61331]/10 border border-[#C61331]/30 rounded-lg"
-                    >
-                      <p className="text-xs font-bold text-[#C61331] mb-1 tracking-wider font-[Rajdhani]">
-                        MISSÃO GERADA:
-                      </p>
-                      <p className="text-white/80 text-sm font-[Rajdhani]">
-                        {generatedMission[project.id]}
-                      </p>
-                    </motion.div>
-                  )}
-
-                  {/* AI Mission Button */}
-                  <button
-                    onClick={() => generateMission(project.id)}
-                    disabled={generatingMission === project.id}
-                    className="w-full px-4 py-3 bg-[#C61331] text-white font-bold tracking-wider uppercase rounded-lg transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_20px_rgba(198,19,49,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-[Rajdhani] text-sm"
-                  >
-                    <Zap size={16} />
-                    {generatingMission === project.id ? "Gerando..." : "Gerar Missão com IA"}
-                  </button>
                 </div>
               </div>
             </motion.div>

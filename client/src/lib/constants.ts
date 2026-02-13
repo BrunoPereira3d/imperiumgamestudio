@@ -33,6 +33,7 @@ export const NAV_ITEMS = [
   { label: "Serviços B2B", href: "#outsourcing" },
   { label: "Portfólio", href: "#portfolio" },
   { label: "Quem Somos", href: "#about" },
+  { label: "Carreiras", href: "#careers" },
   { label: "Contato", href: "#contact" },
 ];
 
@@ -155,6 +156,5 @@ export const PORTFOLIO_WORKS = [
 export const STATS = [
   { value: 50, suffix: "+", label: "Projetos Entregues" },
   { value: 8, suffix: "+", label: "Anos de Experiência" },
-  { value: 30, suffix: "+", label: "Profissionais" },
   { value: 15, suffix: "+", label: "Clientes Ativos" },
 ];

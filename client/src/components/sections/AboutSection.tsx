@@ -121,7 +121,7 @@ export default function AboutSection() {
         </div>
 
         {/* Stats */}
-        <div ref={statsRef} className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-t border-b border-white/5">
+        <div ref={statsRef} className="mt-24 grid grid-cols-2 md:grid-cols-3 gap-8 py-12 border-t border-b border-white/5">
           {STATS.map((stat, i) => (
             <StatItem key={stat.label} stat={stat} isVisible={statsVisible} index={i} />
           ))}

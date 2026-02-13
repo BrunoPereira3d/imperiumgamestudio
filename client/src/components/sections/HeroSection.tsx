@@ -5,9 +5,29 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { HERO_BG_URL, LOGO_ICON_URL } from "@/lib/constants";
 import { useParallax } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
   const scrollY = useParallax();
+  const { language } = useLanguage();
+
+  const getTagline = () => {
+    if (language === "en") return "Games · 3D · Animation · 3D Printing";
+    if (language === "es") return "Juegos · 3D · Animación · Impresión 3D";
+    return "Games · 3D · Animação · Impressão 3D";
+  };
+
+  const getButton1 = () => {
+    if (language === "en") return "Our Games";
+    if (language === "es") return "Nuestros Juegos";
+    return "Nossos Games";
+  };
+
+  const getButton2 = () => {
+    if (language === "en") return "B2B Services";
+    if (language === "es") return "Servicios B2B";
+    return "Serviços B2B";
+  };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -83,7 +103,7 @@ export default function HeroSection() {
           <div className="flex items-center justify-center gap-4 text-white/40">
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#c41e2a]/50" />
             <p className="text-sm sm:text-base md:text-lg font-[Rajdhani] font-light tracking-[0.3em] uppercase">
-              Games &middot; 3D &middot; Animação &middot; Impressão 3D
+              {getTagline()}
             </p>
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#c41e2a]/50" />
           </div>
@@ -100,13 +120,13 @@ export default function HeroSection() {
             onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
             className="px-8 py-3.5 bg-[#C61331] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_40px_rgba(198,19,49,0.4)] font-[Rajdhani]"
           >
-            Nossos Games
+            {getButton1()}
           </button>
           <button
             onClick={() => document.getElementById("outsourcing")?.scrollIntoView({ behavior: "smooth" })}
             className="px-8 py-3.5 border border-white/20 text-white/80 font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:border-[#C61331]/50 hover:text-white hover:bg-white/5 font-[Rajdhani]"
           >
-            Serviços B2B
+            {getButton2()}
           </button>
         </motion.div>
       </div>

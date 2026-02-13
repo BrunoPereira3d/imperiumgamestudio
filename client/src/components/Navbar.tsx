@@ -3,13 +3,16 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { LOGO_ICON_URL, NAV_ITEMS } from "@/lib/constants";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const { language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +50,12 @@ export default function Navbar() {
       el.scrollIntoView({ behavior: "smooth" });
     }
     setIsMobileOpen(false);
+  };
+
+  const getContactText = () => {
+    if (language === "pt") return "Fale Conosco";
+    if (language === "en") return "Contact Us";
+    return "Contáctenos";
   };
 
   return (
@@ -102,23 +111,96 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA Desktop */}
-          <div className="hidden lg:block">
+          {/* Language Selector & CTA Desktop */}
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="relative">
+              <button
+                onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                className="flex items-center gap-2 px-3 py-2 text-white/60 hover:text-white transition-colors duration-300 font-[Rajdhani] text-sm"
+              >
+                <Globe size={18} />
+                {language.toUpperCase()}
+              </button>
+              <AnimatePresence>
+                {showLanguageMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-sm overflow-hidden z-50"
+                  >
+                    {(["pt", "en", "es"] as const).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setShowLanguageMenu(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm font-[Rajdhani] transition-colors duration-300 ${
+                          language === lang
+                            ? "bg-[#C61331] text-white"
+                            : "text-white/60 hover:text-white hover:bg-white/5"
+                        }`}
+                      >
+                        {lang === "pt" ? "Português" : lang === "en" ? "English" : "Español"}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
             <button
               onClick={() => scrollToSection("#contact")}
               className="px-6 py-2.5 bg-[#C61331] text-white text-sm font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_30px_rgba(198,19,49,0.3)] font-[Rajdhani]"
             >
-              Fale Conosco
+              {getContactText()}
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            className="lg:hidden text-white/80 hover:text-white p-2"
-          >
-            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Language Selector Mobile & Mobile Toggle */}
+          <div className="lg:hidden flex items-center gap-2">
+            <div className="relative">
+              <button
+                onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                className="flex items-center gap-1 px-2 py-2 text-white/60 hover:text-white transition-colors duration-300"
+              >
+                <Globe size={18} />
+              </button>
+              <AnimatePresence>
+                {showLanguageMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-sm overflow-hidden z-50"
+                  >
+                    {(["pt", "en", "es"] as const).map((lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => {
+                          setLanguage(lang);
+                          setShowLanguageMenu(false);
+                        }}
+                        className={`block w-full text-left px-4 py-2 text-sm font-[Rajdhani] transition-colors duration-300 ${
+                          language === lang
+                            ? "bg-[#C61331] text-white"
+                            : "text-white/60 hover:text-white hover:bg-white/5"
+                        }`}
+                      >
+                        {lang === "pt" ? "Português" : lang === "en" ? "English" : "Español"}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            <button
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              className="text-white/80 hover:text-white p-2"
+            >
+              {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -149,12 +231,30 @@ export default function Navbar() {
                   {item.label}
                 </motion.button>
               ))}
-              <div className="pt-4 px-4">
+              <div className="pt-4 px-4 space-y-3">
+                <div className="flex gap-2">
+                  {(["pt", "en", "es"] as const).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setShowLanguageMenu(false);
+                      }}
+                      className={`flex-1 px-3 py-2 text-xs font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 font-[Rajdhani] ${
+                        language === lang
+                          ? "bg-[#C61331] text-white"
+                          : "bg-white/5 text-white/60 hover:text-white"
+                      }`}
+                    >
+                      {lang === "pt" ? "PT" : lang === "en" ? "EN" : "ES"}
+                    </button>
+                  ))}
+                </div>
                 <button
                   onClick={() => scrollToSection("#contact")}
                   className="w-full px-6 py-3 bg-[#C61331] text-white text-sm font-semibold tracking-wider uppercase rounded-sm font-[Rajdhani]"
                 >
-                  Fale Conosco
+                  {getContactText()}
                 </button>
               </div>
             </div>
