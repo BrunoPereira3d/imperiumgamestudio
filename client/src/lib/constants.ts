@@ -124,30 +124,30 @@ export const PROJECTS = [
 export const PORTFOLIO_WORKS = [
   {
     id: 1,
-    title: "Personagem 3D - Guarda da Fortaleza",
+    title: "Viking Low-Poly",
     category: "Modelagem 3D",
-    description: "Modelagem de personagem 3D estilizado com rigging e texturização de alta qualidade. Personagem pronto para animação e implementação em engine.",
+    description: "Criação de assets otimizados com estética 'paper-craft' única para jogos mobile ou indie.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/ScbkOfuedSckVuUe.png",
   },
   {
     id: 2,
-    title: "Personagem 3D - Criatura Mística",
+    title: "Expressão Goblin",
     category: "Modelagem 3D",
-    description: "Criatura fantástica com características únicas e detalhes intrincados. Modelo totalmente texturizado e pronto para produção.",
+    description: "Modelagem facial de alta frequência e texturização de pele para NPCs com personalidade.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/pqDWxBLWVBKryCnd.png",
   },
   {
     id: 3,
-    title: "Ambiente 3D - Mundo Surreal",
+    title: "Cavaleiro Marshmallow",
     category: "Modelagem 3D",
-    description: "Ambiente 3D completo com atmosfera única e iluminação cinematográfica. Cenário imersivo para exploração e gameplay.",
+    description: "Renderização de materiais complexos e iluminação atmosférica para cenários de fantasia.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QmIqyBmOgliSdapx.png",
   },
   {
     id: 4,
-    title: "Personagem Mágico - Feiticeiro",
+    title: "Mago Estilizado",
     category: "Modelagem 3D",
-    description: "Personagem mágico com design único e acessórios detalhados. Pronto para cutscenes e cinemáticas de alta qualidade.",
+    description: "Estudo de personagem com foco em texturização de tecido e madeira. Design carismático pronto para rigging.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cZrJzablDiMELNzw.png",
   },
 ];
