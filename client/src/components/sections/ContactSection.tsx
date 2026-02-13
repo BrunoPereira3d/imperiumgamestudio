@@ -6,9 +6,11 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Mail, MapPin, Phone, Send, Instagram } from "lucide-react";
 import { toast } from "sonner";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ContactSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +19,102 @@ export default function ContactSection() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const getLabel = (key: string) => {
+    const labels = {
+      pt: {
+        contato: "Contato",
+        vamosConversar: "Vamos Conversar",
+        descricao: "Tem um projeto em mente ou precisa de suporte para sua produção? Entre em contato e vamos discutir como podemos colaborar.",
+        email: "E-mail",
+        telefone: "Telefone",
+        endereco: "Endereço",
+        nome: "Nome *",
+        emailLabel: "E-mail *",
+        empresa: "Empresa",
+        assunto: "Assunto *",
+        mensagem: "Mensagem *",
+        selecioneAssunto: "Selecione um assunto",
+        desenvolvimento: "Desenvolvimento de Games",
+        modelagem: "Modelagem 3D",
+        animacao: "Animação",
+        impressao: "Impressão 3D",
+        solucoes: "Soluções Digitais",
+        treinamento: "Treinamento VR",
+        outsourcing: "Outsourcing",
+        outro: "Outro",
+        seuNome: "Seu nome",
+        seuEmail: "seu@email.com",
+        nomeEmpresa: "Nome da empresa (opcional)",
+        descrevaSeuProjeto: "Descreva seu projeto ou dúvida...",
+        enviando: "Enviando...",
+        enviarMensagem: "Enviar Mensagem",
+        sucesso: "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+        erro: "Erro ao enviar mensagem. Tente novamente.",
+      },
+      en: {
+        contato: "Contact",
+        vamosConversar: "Let's Talk",
+        descricao: "Have a project in mind or need support for your production? Get in touch and let's discuss how we can collaborate.",
+        email: "Email",
+        telefone: "Phone",
+        endereco: "Address",
+        nome: "Name *",
+        emailLabel: "Email *",
+        empresa: "Company",
+        assunto: "Subject *",
+        mensagem: "Message *",
+        selecioneAssunto: "Select a subject",
+        desenvolvimento: "Game Development",
+        modelagem: "3D Modeling",
+        animacao: "Animation",
+        impressao: "3D Printing",
+        solucoes: "Digital Solutions",
+        treinamento: "VR Training",
+        outsourcing: "Outsourcing",
+        outro: "Other",
+        seuNome: "Your name",
+        seuEmail: "your@email.com",
+        nomeEmpresa: "Company name (optional)",
+        descrevaSeuProjeto: "Describe your project or question...",
+        enviando: "Sending...",
+        enviarMensagem: "Send Message",
+        sucesso: "Message sent successfully! We'll get in touch soon.",
+        erro: "Error sending message. Please try again.",
+      },
+      es: {
+        contato: "Contacto",
+        vamosConversar: "Hablemos",
+        descricao: "¿Tienes un proyecto en mente o necesitas apoyo para tu producción? Ponte en contacto y discutamos cómo podemos colaborar.",
+        email: "Correo",
+        telefone: "Teléfono",
+        endereco: "Dirección",
+        nome: "Nombre *",
+        emailLabel: "Correo *",
+        empresa: "Empresa",
+        assunto: "Asunto *",
+        mensagem: "Mensaje *",
+        selecioneAssunto: "Selecciona un asunto",
+        desenvolvimento: "Desarrollo de Juegos",
+        modelagem: "Modelado 3D",
+        animacao: "Animación",
+        impressao: "Impresión 3D",
+        solucoes: "Soluciones Digitales",
+        treinamento: "Entrenamiento VR",
+        outsourcing: "Outsourcing",
+        outro: "Otro",
+        seuNome: "Tu nombre",
+        seuEmail: "tu@email.com",
+        nomeEmpresa: "Nombre de la empresa (opcional)",
+        descrevaSeuProjeto: "Describe tu proyecto o pregunta...",
+        enviando: "Enviando...",
+        enviarMensagem: "Enviar Mensaje",
+        sucesso: "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+        erro: "Error al enviar el mensaje. Intenta de nuevo.",
+      },
+    };
+    return labels[language][key as keyof typeof labels.pt] || labels.pt[key as keyof typeof labels.pt];
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,13 +138,13 @@ export default function ContactSection() {
       });
 
       if (response.ok) {
-        toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+        toast.success(getLabel("sucesso"));
         setFormData({ name: "", email: "", company: "", subject: "", message: "" });
       } else {
-        toast.error("Erro ao enviar mensagem. Tente novamente.");
+        toast.error(getLabel("erro"));
       }
     } catch (error) {
-      toast.error("Erro ao enviar mensagem. Tente novamente.");
+      toast.error(getLabel("erro"));
     } finally {
       setIsSubmitting(false);
     }
@@ -66,13 +164,13 @@ export default function ContactSection() {
             className="lg:col-span-2"
           >
             <span className="text-[#C61331] text-sm tracking-[0.3em] uppercase font-semibold font-[Rajdhani]">
-              Contato
+              {getLabel("contato")}
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-white leading-tight font-[Orbitron]">
-              Vamos <span className="text-[#C61331]">Conversar</span>
+              {language === "en" ? "Let's" : language === "es" ? "Hablemos" : "Vamos"} <span className="text-[#C61331]">{language === "en" ? "Talk" : language === "es" ? "" : "Conversar"}</span>
             </h2>
             <p className="mt-4 text-white/50 text-lg font-[Rajdhani] leading-relaxed">
-              Tem um projeto em mente ou precisa de suporte para sua produção? Entre em contato e vamos discutir como podemos colaborar.
+              {getLabel("descricao")}
             </p>
 
             <div className="mt-10 space-y-6">
@@ -81,7 +179,7 @@ export default function ContactSection() {
                   <Mail size={18} className="text-[#C61331]" />
                 </div>
                 <div>
-                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">E-mail</div>
+                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("email")}</div>
                   <a href="mailto:brunopereira@imperiumgamestudio.com" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
                     brunopereira@imperiumgamestudio.com
                   </a>
@@ -93,7 +191,7 @@ export default function ContactSection() {
                   <Phone size={18} className="text-[#C61331]" />
                 </div>
                 <div>
-                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">Telefone</div>
+                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("telefone")}</div>
                   <a href="tel:+5511211056" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
                     +55 (11) 2110-5658
                   </a>
@@ -105,7 +203,7 @@ export default function ContactSection() {
                   <MapPin size={18} className="text-[#C61331]" />
                 </div>
                 <div>
-                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">Endereço</div>
+                  <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("endereco")}</div>
                   <div className="text-white/50 text-sm font-[Rajdhani]">Avenida Paulista, 1636, Sala 1105, Bela Vista, São Paulo-SP</div>
                 </div>
               </div>
@@ -135,7 +233,7 @@ export default function ContactSection() {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
-                    Nome *
+                    {getLabel("nome")}
                   </label>
                   <input
                     type="text"
@@ -143,12 +241,12 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] placeholder:text-white/20 focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300"
-                    placeholder="Seu nome"
+                    placeholder={getLabel("seuNome")}
                   />
                 </div>
                 <div>
                   <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
-                    E-mail *
+                    {getLabel("emailLabel")}
                   </label>
                   <input
                     type="email"
@@ -156,7 +254,7 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] placeholder:text-white/20 focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300"
-                    placeholder="seu@email.com"
+                    placeholder={getLabel("seuEmail")}
                   />
                 </div>
               </div>
@@ -164,19 +262,19 @@ export default function ContactSection() {
               <div className="grid sm:grid-cols-2 gap-5 mt-5">
                 <div>
                   <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
-                    Empresa
+                    {getLabel("empresa")}
                   </label>
                   <input
                     type="text"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] placeholder:text-white/20 focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300"
-                    placeholder="Nome da empresa (opcional)"
+                    placeholder={getLabel("nomeEmpresa")}
                   />
                 </div>
                 <div>
                   <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
-                    Assunto *
+                    {getLabel("assunto")}
                   </label>
                   <select
                     required
@@ -184,22 +282,22 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300"
                   >
-                    <option value="">Selecione um assunto</option>
-                    <option value="Desenvolvimento de Games">Desenvolvimento de Games</option>
-                    <option value="Modelagem 3D">Modelagem 3D</option>
-                    <option value="Animação">Animação</option>
-                    <option value="Impressão 3D">Impressão 3D</option>
-                    <option value="Soluções Digitais">Soluções Digitais</option>
-                    <option value="Treinamento VR">Treinamento VR</option>
-                    <option value="Outsourcing">Outsourcing</option>
-                    <option value="Outro">Outro</option>
+                    <option value="">{getLabel("selecioneAssunto")}</option>
+                    <option value="Desenvolvimento de Games">{getLabel("desenvolvimento")}</option>
+                    <option value="Modelagem 3D">{getLabel("modelagem")}</option>
+                    <option value="Animação">{getLabel("animacao")}</option>
+                    <option value="Impressão 3D">{getLabel("impressao")}</option>
+                    <option value="Soluções Digitais">{getLabel("solucoes")}</option>
+                    <option value="Treinamento VR">{getLabel("treinamento")}</option>
+                    <option value="Outsourcing">{getLabel("outsourcing")}</option>
+                    <option value="Outro">{getLabel("outro")}</option>
                   </select>
                 </div>
               </div>
 
               <div className="mt-5">
                 <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
-                  Mensagem *
+                  {getLabel("mensagem")}
                 </label>
                 <textarea
                   required
@@ -207,7 +305,7 @@ export default function ContactSection() {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] placeholder:text-white/20 focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300 resize-none"
-                  placeholder="Descreva seu projeto ou dúvida..."
+                  placeholder={getLabel("descrevaSeuProjeto")}
                 />
               </div>
 
@@ -217,7 +315,7 @@ export default function ContactSection() {
                 className="mt-6 w-full bg-[#C61331] text-white py-3 rounded-sm font-bold font-[Orbitron] tracking-wider uppercase hover:bg-[#A00D24] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 group"
               >
                 <Send size={18} className="group-hover:translate-x-1 transition-transform" />
-                {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+                {isSubmitting ? getLabel("enviando") : getLabel("enviarMensagem")}
               </button>
             </form>
           </motion.div>

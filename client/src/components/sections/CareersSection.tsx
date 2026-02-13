@@ -30,36 +30,89 @@ export default function CareersSection() {
     if (language === "es") return "Enviar Currículum";
     return "Enviar Currículo";
   };
+
+  const getCandidatar = () => {
+    if (language === "en") return "Apply";
+    if (language === "es") return "Solicitar";
+    return "Candidatar-se";
+  };
+
   const jobs = [
     {
-      title: "Desenvolvedor de Games Unreal",
-      department: "Desenvolvimento",
-      location: "São Paulo, SP",
-      type: "Tempo Integral",
-      description: "Buscamos desenvolvedores experientes em C++ para trabalhar em projetos AAA com Unreal Engine.",
+      pt: {
+        title: "Desenvolvedor de Games Unreal",
+        department: "Desenvolvimento",
+        description: "Buscamos desenvolvedores experientes em C++ para trabalhar em projetos AAA com Unreal Engine.",
+      },
+      en: {
+        title: "Unreal Game Developer",
+        department: "Development",
+        description: "We seek experienced C++ developers to work on AAA projects with Unreal Engine.",
+      },
+      es: {
+        title: "Desarrollador de Juegos Unreal",
+        department: "Desarrollo",
+        description: "Buscamos desarrolladores experimentados en C++ para trabajar en proyectos AAA con Unreal Engine.",
+      },
     },
     {
-      title: "Artista 3D - Modelagem",
-      department: "Arte",
-      location: "São Paulo, SP",
-      type: "Tempo Integral",
-      description: "Procuramos artistas 3D com experiência em modelagem de personagens e ambientes para games.",
+      pt: {
+        title: "Social Media Manager",
+        department: "Marketing",
+        description: "Responsável por gerenciar redes sociais e comunidades do estúdio e dos games desenvolvidos, criando conteúdo engajador.",
+      },
+      en: {
+        title: "Social Media Manager",
+        department: "Marketing",
+        description: "Manage social media and communities for the studio and developed games, creating engaging content.",
+      },
+      es: {
+        title: "Gerente de Redes Sociales",
+        department: "Marketing",
+        description: "Gestiona redes sociales y comunidades del estudio y juegos desarrollados, creando contenido atractivo.",
+      },
     },
     {
-      title: "Animador 3D",
-      department: "Arte",
-      location: "Remoto",
-      type: "Tempo Integral",
-      description: "Animador experiente em rigging e animação de personagens para projetos de games e cinema.",
+      pt: {
+        title: "Animador 3D",
+        department: "Arte",
+        description: "Animador experiente em rigging e animação de personagens para projetos de games e cinema.",
+      },
+      en: {
+        title: "3D Animator",
+        department: "Art",
+        description: "Experienced animator in character rigging and animation for game and film projects.",
+      },
+      es: {
+        title: "Animador 3D",
+        department: "Arte",
+        description: "Animador experimentado en rigging y animación de personajes para proyectos de juegos y cine.",
+      },
     },
     {
-      title: "Designer UX/UI",
-      department: "Design",
-      location: "São Paulo, SP",
-      type: "Tempo Integral",
-      description: "Designer criativo para interfaces de games e aplicações interativas com foco em experiência do usuário.",
+      pt: {
+        title: "Designer UX/UI",
+        department: "Design",
+        description: "Designer criativo para interfaces de games e aplicações interativas com foco em experiência do usuário.",
+      },
+      en: {
+        title: "UX/UI Designer",
+        department: "Design",
+        description: "Creative designer for game interfaces and interactive applications with focus on user experience.",
+      },
+      es: {
+        title: "Diseñador UX/UI",
+        department: "Diseño",
+        description: "Diseñador creativo para interfaces de juegos y aplicaciones interactivas enfocado en experiencia del usuario.",
+      },
     },
   ];
+
+  const getJobData = (job: typeof jobs[0]) => {
+    if (language === "en") return job.en;
+    if (language === "es") return job.es;
+    return job.pt;
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -114,44 +167,50 @@ export default function CareersSection() {
           viewport={{ once: true }}
           className="grid md:grid-cols-2 gap-6"
         >
-          {jobs.map((job, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group p-6 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-sm hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.2)]"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-bold text-white font-[Rajdhani] mb-1">
-                    {job.title}
-                  </h3>
-                  <p className="text-[#C61331] text-sm font-[Orbitron] tracking-wider uppercase">
-                    {job.department}
-                  </p>
+          {jobs.map((job, index) => {
+            const jobData = getJobData(job);
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group p-6 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-sm hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.2)]"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-white font-[Rajdhani] mb-1">
+                      {jobData.title}
+                    </h3>
+                    <p className="text-[#C61331] text-sm font-[Orbitron] tracking-wider uppercase">
+                      {jobData.department}
+                    </p>
+                  </div>
+                  <Briefcase className="w-5 h-5 text-[#C61331] opacity-60" />
                 </div>
-                <Briefcase className="w-5 h-5 text-[#C61331] opacity-60" />
-              </div>
 
-              <p className="text-white/70 text-sm font-[Rajdhani] mb-4">
-                {job.description}
-              </p>
+                <p className="text-white/70 text-sm font-[Rajdhani] mb-4">
+                  {jobData.description}
+                </p>
 
-              <div className="flex flex-wrap gap-4 mb-6">
-                <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
-                  <MapPin className="w-4 h-4 text-[#C61331]" />
-                  {job.location}
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
+                    <MapPin className="w-4 h-4 text-[#C61331]" />
+                    Remoto
+                  </div>
+                  <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
+                    <Clock className="w-4 h-4 text-[#C61331]" />
+                    {language === "en" ? "Full-time" : language === "es" ? "Tiempo Completo" : "Tempo Integral"}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
-                  <Clock className="w-4 h-4 text-[#C61331]" />
-                  {job.type}
-                </div>
-              </div>
 
-              <button className="w-full px-4 py-2 bg-[#C61331]/10 border border-[#C61331]/50 text-[#C61331] text-sm font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#C61331] hover:text-white group-hover:shadow-[0_0_20px_rgba(198,19,49,0.3)]">
-                Candidatar-se
-              </button>
-            </motion.div>
-          ))}
+                <a
+                  href="mailto:brunopereira@imperiumgamestudio.com"
+                  className="w-full px-4 py-2 bg-[#C61331]/10 border border-[#C61331]/50 text-[#C61331] text-sm font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#C61331] hover:text-white group-hover:shadow-[0_0_20px_rgba(198,19,49,0.3)] inline-block text-center font-[Rajdhani]"
+                >
+                  {getCandidatar()}
+                </a>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* CTA */}
@@ -166,7 +225,7 @@ export default function CareersSection() {
             {getNaoEncontrou()}
           </p>
           <a
-            href="mailto:carreiras@imperiumgamestudio.com"
+            href="mailto:brunopereira@imperiumgamestudio.com"
             className="inline-block px-8 py-3 bg-[#C61331] text-white font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_30px_rgba(198,19,49,0.3)] font-[Rajdhani]"
           >
             {getEnviarCurriculo()}
