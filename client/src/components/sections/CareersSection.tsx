@@ -3,11 +3,48 @@
 import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CareersSection() {
   const { language } = useLanguage();
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+
+  // Add JobPosting schema markup for Google Jobs
+  useEffect(() => {
+    const jobTitles = ["Unreal Game Developer", "Social Media Manager", "3D Animator", "UX/UI Designer"];
+    
+    // Remove existing job posting scripts
+    const existingScripts = document.querySelectorAll('script[data-job-posting="true"]');
+    existingScripts.forEach(script => script.remove());
+    
+    // Add new schema markup for each job
+    jobTitles.forEach((title) => {
+      const schema = {
+        "@context": "https://schema.org/",
+        "@type": "JobPosting",
+        "title": title,
+        "hiringOrganization": {
+          "@type": "Organization",
+          "name": "Imperium Game Studio",
+          "sameAs": "https://imperiumgamestudio.com",
+        },
+        "jobLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BR",
+          },
+        },
+        "employmentType": "FULL_TIME",
+        "datePosted": new Date().toISOString().split("T")[0],
+      };
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.setAttribute("data-job-posting", "true");
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+    });
+  }, []);
 
   const getTitle = () => {
     if (language === "en") return "Join Imperium";
@@ -223,72 +260,71 @@ export default function CareersSection() {
 
         {/* Jobs Grid */}
         <motion.div
-          key={selectedDepartment || 'all'}
+          key={selectedDepartment}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {filteredJobs.map((job, index) => {
+          {filteredJobs.map((job) => {
             const jobData = getJobData(job);
             return (
               <motion.div
-                key={`${selectedDepartment}-${index}`}
+                key={jobData.title}
                 variants={itemVariants}
-                className="group p-6 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-sm hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.2)]"
+                className="group relative"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white font-[Rajdhani] mb-1">
-                      {jobData.title}
-                    </h3>
-                    <p className="text-[#C61331] text-sm font-[Orbitron] tracking-wider uppercase">
-                      {jobData.department}
-                    </p>
+                <div className="relative bg-[#1a1a1a] border border-white/10 rounded-lg p-6 hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.2)] flex flex-col h-full">
+                  {/* Header */}
+                  <div className="mb-4">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-white mb-2 font-[Orbitron]">
+                          {jobData.title}
+                        </h3>
+                        <div className="flex items-center gap-2 text-white/60 text-sm font-[Rajdhani]">
+                          <Briefcase size={16} />
+                          <span>{jobData.department}</span>
+                        </div>
+                      </div>
+                      <span className="inline-block px-3 py-1 bg-[#C61331]/20 text-[#C61331] text-xs font-[Rajdhani] tracking-wider uppercase rounded-sm ml-2">
+                        Remote
+                      </span>
+                    </div>
                   </div>
-                  <Briefcase className="w-5 h-5 text-[#C61331] opacity-60" />
+
+                  {/* Description */}
+                  <p className="text-white/60 text-sm mb-6 flex-grow font-[Rajdhani] leading-relaxed">
+                    {jobData.description}
+                  </p>
+
+                  {/* CTA Button */}
+                  <a
+                    href={`mailto:brunopereira3d@icloud.com?subject=Candidatura%20-%20${encodeURIComponent(jobData.title)}`}
+                    className="inline-flex items-center justify-center gap-2 w-full bg-[#C61331] hover:bg-[#ff4444] text-white font-[Rajdhani] font-semibold py-3 rounded-sm transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(198,19,49,0.4)]"
+                  >
+                    {getCandidatar()}
+                  </a>
                 </div>
-
-                <p className="text-white/70 text-sm font-[Rajdhani] mb-4">
-                  {jobData.description}
-                </p>
-
-                <div className="flex flex-wrap gap-4 mb-6">
-                  <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
-                    <MapPin className="w-4 h-4 text-[#C61331]" />
-                    Remoto
-                  </div>
-                  <div className="flex items-center gap-2 text-white/50 text-xs font-[Rajdhani]">
-                    <Clock className="w-4 h-4 text-[#C61331]" />
-                    {language === "en" ? "Full-time" : language === "es" ? "Tiempo Completo" : "Tempo Integral"}
-                  </div>
-                </div>
-
-                <a
-                  href="mailto:brunopereira3d@icloud.com"
-                  className="w-full px-4 py-2 bg-[#C61331]/10 border border-[#C61331]/50 text-[#C61331] text-sm font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#C61331] hover:text-white group-hover:shadow-[0_0_20px_rgba(198,19,49,0.3)] inline-block text-center font-[Rajdhani]"
-                >
-                  {getCandidatar()}
-                </a>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* CTA */}
+        {/* Fallback CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <p className="text-white/60 text-sm font-[Rajdhani] mb-4">
-            {getNaoEncontrou()}
+          <p className="text-white/60 mb-4 font-[Rajdhani]">
+            {getNaoEncontrou()} <span className="text-[#C61331] font-semibold">brunopereira3d@icloud.com</span>
           </p>
           <a
             href="mailto:brunopereira3d@icloud.com"
-            className="inline-block px-8 py-3 bg-[#C61331] text-white font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_30px_rgba(198,19,49,0.3)] font-[Rajdhani]"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-[#C61331]/50 text-[#C61331] hover:bg-[#C61331]/10 font-[Rajdhani] font-semibold rounded-sm transition-all duration-300"
           >
             {getEnviarCurriculo()}
           </a>

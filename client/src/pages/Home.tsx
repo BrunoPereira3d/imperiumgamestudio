@@ -9,6 +9,7 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import OutsourcingSection from "@/components/sections/OutsourcingSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import PortfolioSection from "@/components/sections/PortfolioSection";
+import BlogSection from "@/components/sections/BlogSection";
 import ContactSection from "@/components/sections/ContactSection";
 import CareersSection from "@/components/sections/CareersSection";
 import Footer from "@/components/Footer";
@@ -25,6 +26,7 @@ export default function Home() {
         <OutsourcingSection />
         <PortfolioSection />
         <AboutSection />
+        <BlogSection />
         <CareersSection />
         <ContactSection />
       </main>

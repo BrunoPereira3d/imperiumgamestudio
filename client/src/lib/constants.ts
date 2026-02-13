@@ -33,6 +33,7 @@ export const NAV_ITEMS_PT = [
   { label: "Serviços B2B", href: "#outsourcing" },
   { label: "Portfólio", href: "#portfolio" },
   { label: "Quem Somos", href: "#about" },
+  { label: "Blog", href: "#blog" },
   { label: "Carreiras", href: "#careers" },
   { label: "Contato", href: "#contact" },
 ];
@@ -43,6 +44,7 @@ export const NAV_ITEMS_EN = [
   { label: "B2B Services", href: "#outsourcing" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "About Us", href: "#about" },
+  { label: "Blog", href: "#blog" },
   { label: "Careers", href: "#careers" },
   { label: "Contact", href: "#contact" },
 ];
@@ -53,6 +55,7 @@ export const NAV_ITEMS_ES = [
   { label: "Servicios B2B", href: "#outsourcing" },
   { label: "Portafolio", href: "#portfolio" },
   { label: "Quiénes Somos", href: "#about" },
+  { label: "Blog", href: "#blog" },
   { label: "Carreras", href: "#careers" },
   { label: "Contacto", href: "#contact" },
 ];
