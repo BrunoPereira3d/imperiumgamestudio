@@ -29,8 +29,8 @@ export const VR_TRAINING_URL = "https://files.manuscdn.com/user_upload_by_module
 
 export const NAV_ITEMS = [
   { label: "Início", href: "#hero" },
-  { label: "Nossos Projetos", href: "#projects" },
-  { label: "Outsourcing", href: "#outsourcing" },
+  { label: "GAMES", href: "#projects" },
+  { label: "Serviços B2B", href: "#outsourcing" },
   { label: "Portfólio", href: "#portfolio" },
   { label: "Quem Somos", href: "#about" },
   { label: "Contato", href: "#contact" },

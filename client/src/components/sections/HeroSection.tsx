@@ -97,16 +97,16 @@ export default function HeroSection() {
           className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
         >
           <button
-            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 bg-[#c41e2a] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#a01824] hover:shadow-[0_0_40px_rgba(196,30,42,0.4)] font-[Rajdhani]"
+            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+            className="px-8 py-3.5 bg-[#C61331] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_40px_rgba(198,19,49,0.4)] font-[Rajdhani]"
           >
-            Nossos Serviços
+            Nossos Games
           </button>
           <button
             onClick={() => document.getElementById("outsourcing")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 border border-white/20 text-white/80 font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:border-[#c41e2a]/50 hover:text-white hover:bg-white/5 font-[Rajdhani]"
+            className="px-8 py-3.5 border border-white/20 text-white/80 font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:border-[#C61331]/50 hover:text-white hover:bg-white/5 font-[Rajdhani]"
           >
-            Outsourcing
+            Serviços B2B
           </button>
         </motion.div>
       </div>
