@@ -1,7 +1,7 @@
-// DESIGN: Cinematic Dark Forge — Portfolio Section with lightbox gallery
+// DESIGN: Cinematic Dark Forge — Portfolio Section
 // Showcase of completed works with full-screen image preview and hover description
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
 import { PORTFOLIO_WORKS } from "@/lib/constants";
@@ -11,6 +11,24 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export default function PortfolioSection() {
   const [selectedWork, setSelectedWork] = useState<number | null>(null);
   const { language } = useLanguage();
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [offsets, setOffsets] = useState<number[]>(new Array(PORTFOLIO_WORKS.length).fill(0));
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const newOffsets = imageRefs.current.map((ref) => {
+        if (!ref) return 0;
+        const rect = ref.getBoundingClientRect();
+        const elementCenter = rect.top + rect.height / 2;
+        const windowCenter = window.innerHeight / 2;
+        return (windowCenter - elementCenter) * 0.08;
+      });
+      setOffsets(newOffsets);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const getTitle = () => {
     if (language === "en") return "Portfolio";
@@ -65,11 +83,15 @@ export default function PortfolioSection() {
               <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300 cursor-pointer hover:shadow-[0_0_30px_rgba(198,19,49,0.5),inset_0_0_30px_rgba(198,19,49,0.1)]"
                 onClick={() => setSelectedWork(work.id)}>
                 {/* Image Container */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden" ref={(el) => { imageRefs.current[index] = el; }}>
                   <img
                     src={work.image}
                     alt={work.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    style={{
+                      transform: `translateY(${offsets[index]}px)`,
+                      transition: "transform 0.1s ease-out"
+                    }}
                   />
                   {/* Dark blur overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />

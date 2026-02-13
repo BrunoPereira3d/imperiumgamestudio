@@ -1,7 +1,7 @@
 // DESIGN: Cinematic Dark Forge — Projects Section with game cards
 // Features game cards with lightbox preview and hover description effect
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
@@ -11,6 +11,24 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const { language } = useLanguage();
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [offsets, setOffsets] = useState<number[]>(new Array(PROJECTS.length).fill(0));
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const newOffsets = imageRefs.current.map((ref) => {
+        if (!ref) return 0;
+        const rect = ref.getBoundingClientRect();
+        const elementCenter = rect.top + rect.height / 2;
+        const windowCenter = window.innerHeight / 2;
+        return (windowCenter - elementCenter) * 0.08;
+      });
+      setOffsets(newOffsets);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const getTitle = () => {
     if (language === "en") return "Our Projects";
@@ -64,11 +82,15 @@ export default function ProjectsSection() {
             >
               <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.5),inset_0_0_30px_rgba(198,19,49,0.1)]">
                 {/* Image Container */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden" ref={(el) => { imageRefs.current[index] = el; }}>
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    style={{
+                      transform: `translateY(${offsets[index]}px)`,
+                      transition: "transform 0.1s ease-out"
+                    }}
                   />
                   {/* Dark blur overlay on hover */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
