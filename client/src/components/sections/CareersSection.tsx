@@ -179,6 +179,10 @@ export default function CareersSection() {
           <p className="text-white/60 text-lg font-[Rajdhani] max-w-2xl mx-auto">
             {getDescription()}
           </p>
+          <p className="text-white/50 mt-4 text-sm">
+            <a href="#portfolio" className="text-[#C61331] hover:text-[#ff4444] transition-colors">Ver nossos projetos →</a> | 
+            <a href="#contact" className="text-[#C61331] hover:text-[#ff4444] transition-colors ml-4">Entre em contato →</a>
+          </p>
         </motion.div>
 
         {/* Department Filter */}

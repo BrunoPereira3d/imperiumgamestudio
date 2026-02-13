@@ -67,6 +67,10 @@ export default function PortfolioSection() {
               {getSubtitle()}
             </p>
           </div>
+          <p className="text-white/50 mt-4 text-sm">
+            <a href="#projects" className="text-[#C61331] hover:text-[#ff4444] transition-colors">Ver projetos →</a> | 
+            <a href="#services" className="text-[#C61331] hover:text-[#ff4444] transition-colors ml-4">Servicos →</a>
+          </p>
         </motion.div>
 
         {/* Portfolio Grid - 4 Columns */}

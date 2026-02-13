@@ -67,6 +67,10 @@ export default function ProjectsSection() {
               {getSubtitle()}
             </p>
           </div>
+          <p className="text-white/50 mt-4 text-sm">
+            <a href="#portfolio" className="text-[#C61331] hover:text-[#ff4444] transition-colors">Ver portfólio completo →</a> | 
+            <a href="#services" className="text-[#C61331] hover:text-[#ff4444] transition-colors ml-4">Nossos serviços →</a>
+          </p>
         </motion.div>
 
         {/* Projects Grid */}

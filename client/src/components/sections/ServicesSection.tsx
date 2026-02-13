@@ -194,6 +194,10 @@ export default function ServicesSection() {
             <p className="mt-4 text-white/50 text-lg font-[Rajdhani]">
               {content.description}
             </p>
+            <p className="text-white/50 mt-4 text-sm">
+              <a href="#portfolio" className="text-[#C61331] hover:text-[#ff4444] transition-colors">Ver portfolio →</a> | 
+              <a href="#careers" className="text-[#C61331] hover:text-[#ff4444] transition-colors ml-4">Junte-se ao time →</a>
+            </p>
           </motion.div>
         </div>
 
