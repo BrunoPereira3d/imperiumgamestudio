@@ -8,8 +8,8 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import { useCursorTrail } from "./hooks/useCursorTrail";
 import Chatbot from "./components/Chatbot";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />

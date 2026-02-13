@@ -4,10 +4,13 @@ import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+import JobApplicationForm from "@/components/JobApplicationForm";
 
 export default function CareersSection() {
   const { language } = useLanguage();
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState("");
 
   // Add JobPosting schema markup for Google Jobs
   useEffect(() => {
@@ -299,12 +302,15 @@ export default function CareersSection() {
                   </p>
 
                   {/* CTA Button */}
-                  <a
-                    href={`mailto:brunopereira3d@icloud.com?subject=Candidatura%20-%20${encodeURIComponent(jobData.title)}`}
+                  <button
+                    onClick={() => {
+                      setSelectedPosition(jobData.title);
+                      setShowApplicationForm(true);
+                    }}
                     className="inline-flex items-center justify-center gap-2 w-full bg-[#C61331] hover:bg-[#ff4444] text-white font-[Rajdhani] font-semibold py-3 rounded-sm transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(198,19,49,0.4)]"
                   >
                     {getCandidatar()}
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             );
@@ -330,6 +336,14 @@ export default function CareersSection() {
           </a>
         </motion.div>
       </div>
+
+      {/* Application Form Modal */}
+      {showApplicationForm && (
+        <JobApplicationForm
+          position={selectedPosition}
+          onClose={() => setShowApplicationForm(false)}
+        />
+      )}
     </section>
   );
 }
