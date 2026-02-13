@@ -85,7 +85,7 @@ export default function ProjectsSection() {
                   {/* Status Badge */}
                   <div className="absolute bottom-4 left-4">
                     <span className="px-3 py-1 bg-[#C61331]/20 border border-[#C61331]/50 text-[#C61331] text-xs font-bold tracking-wider rounded-full font-[Rajdhani]">
-                      {project.status}
+                      {language === "en" ? project.statusEn : language === "es" ? project.statusEs : project.status}
                     </span>
                   </div>
 
@@ -97,7 +97,7 @@ export default function ProjectsSection() {
                     className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
                   >
                     <p className="text-white/90 text-sm leading-relaxed font-[Rajdhani]">
-                      {project.description}
+                      {language === "en" ? project.descriptionEn : language === "es" ? project.descriptionEs : project.description}
                     </p>
                   </motion.div>
                 </div>
@@ -113,8 +113,8 @@ export default function ProjectsSection() {
                     </p>
                   </div>
 
-                  <p className="text-white/70 text-sm leading-relaxed font-[Rajdhani]">
-                    {project.description}
+                  <p className="text-white/70 text-sm leading-relaxed font-[Rajdhani]" style={{display: 'none'}}>
+                    {language === "en" ? project.descriptionEn : language === "es" ? project.descriptionEs : project.description}
                   </p>
                 </div>
               </div>

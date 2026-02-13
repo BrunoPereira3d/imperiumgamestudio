@@ -7,9 +7,32 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useMotionValue, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { SERVICES } from "@/lib/constants";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: number }) {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { language } = useLanguage();
+
+  const getServiceData = () => {
+    if (language === "en") {
+      return {
+        title: service.titleEn || service.title,
+        description: service.descriptionEn || service.description,
+      };
+    }
+    if (language === "es") {
+      return {
+        title: service.titleEs || service.title,
+        description: service.descriptionEs || service.description,
+      };
+    }
+    return {
+      title: service.title,
+      description: service.description,
+    };
+  };
+
+  const serviceData = getServiceData();
   const imageRef = useRef<HTMLDivElement>(null);
   const [imageY, setImageY] = useState(0);
 
@@ -104,10 +127,10 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
           transition={{ duration: 0.6, delay: index * 0.15 + 0.3 }}
         >
           <h3 className="text-xl font-bold text-white font-[Orbitron] tracking-wide">
-            {service.title}
+            {serviceData.title}
           </h3>
           <p className="mt-3 text-white/60 leading-relaxed font-[Rajdhani] text-base">
-            {service.description}
+            {serviceData.description}
           </p>
         </motion.div>
 
@@ -120,6 +143,34 @@ function ServiceCard({ service, index }: { service: typeof SERVICES[0]; index: n
 
 export default function ServicesSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.05 });
+  const { language } = useLanguage();
+
+  const getContent = () => {
+    if (language === "en") {
+      return {
+        label: "What We Do",
+        title: "Our",
+        titleHighlight: "Services",
+        description: "We combine technical expertise and artistic vision to deliver comprehensive solutions in digital creation, game development and corporate training.",
+      };
+    }
+    if (language === "es") {
+      return {
+        label: "Qué Hacemos",
+        title: "Nuestros",
+        titleHighlight: "Servicios",
+        description: "Combinamos experiencia técnica y visión artística para entregar soluciones integrales en creación digital, desarrollo de juegos y capacitación corporativa.",
+      };
+    }
+    return {
+      label: "O Que Fazemos",
+      title: "Nossos",
+      titleHighlight: "Serviços",
+      description: "Combinamos expertise técnica e visão artística para entregar soluções completas em criação digital, desenvolvimento de games e treinamento corporativo.",
+    };
+  };
+
+  const content = getContent();
 
   return (
     <section id="services" className="relative py-32 overflow-hidden">
@@ -135,13 +186,13 @@ export default function ServicesSection() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-[#c61331] text-sm tracking-[0.3em] uppercase font-semibold font-[Rajdhani]">
-              O Que Fazemos
+              {content.label}
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-[Orbitron]">
-              Nossos <span className="text-[#c61331]">Serviços</span>
+              {content.title} <span className="text-[#c61331]">{content.titleHighlight}</span>
             </h2>
             <p className="mt-4 text-white/50 text-lg font-[Rajdhani]">
-              Combinamos expertise técnica e visão artística para entregar soluções completas em criação digital, desenvolvimento de games e treinamento corporativo.
+              {content.description}
             </p>
           </motion.div>
         </div>

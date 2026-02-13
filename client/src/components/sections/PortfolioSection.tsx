@@ -89,7 +89,7 @@ export default function PortfolioSection() {
                   {/* Category Badge */}
                   <div className="absolute bottom-2 left-2">
                     <span className="px-2 py-1 bg-[#C61331]/20 border border-[#C61331]/50 text-[#C61331] text-xs font-bold tracking-wider rounded-full font-[Rajdhani]">
-                      {work.category}
+                      {language === "en" ? work.categoryEn : language === "es" ? work.categoryEs : work.category}
                     </span>
                   </div>
 
@@ -101,7 +101,7 @@ export default function PortfolioSection() {
                     className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
                   >
                     <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
-                      {work.description}
+                      {language === "en" ? work.descriptionEn : language === "es" ? work.descriptionEs : work.description}
                     </p>
                   </motion.div>
                 </div>
@@ -111,8 +111,8 @@ export default function PortfolioSection() {
                   <h3 className="text-sm font-bold text-white mb-1 font-[Orbitron] truncate">
                     {work.title}
                   </h3>
-                  <p className="text-white/60 text-xs leading-relaxed font-[Rajdhani] line-clamp-2">
-                    {work.description}
+                  <p className="text-white/60 text-xs leading-relaxed font-[Rajdhani] line-clamp-2" style={{display: 'none'}}>
+                    {language === "en" ? work.descriptionEn : language === "es" ? work.descriptionEs : work.description}
                   </p>
                 </div>
               </div>

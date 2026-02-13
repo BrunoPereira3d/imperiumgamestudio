@@ -5,12 +5,47 @@ import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { OUTSOURCING_URL, OUTSOURCING_FEATURES } from "@/lib/constants";
 import { Users, Workflow, TrendingUp, ShieldCheck, Lock, MessageSquare } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const featureIcons = [Users, Workflow, TrendingUp, ShieldCheck, Lock, MessageSquare];
 
 export default function OutsourcingSection() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.1 });
   const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { language } = useLanguage();
+
+  const getContent = () => {
+    if (language === "en") {
+      return {
+        label: "For Studios",
+        title: "Quality",
+        titleHighlight: "Outsourcing",
+        description: "Need to scale your production without compromising quality? Our team is ready to integrate into your pipeline and deliver assets, animations, and development support with the highest market standards.",
+        buttonText: "Request Proposal",
+        responseTime: "Response within 24 hours",
+      };
+    }
+    if (language === "es") {
+      return {
+        label: "Para Estudios",
+        title: "Outsourcing",
+        titleHighlight: "de Calidad",
+        description: "¿Necesitas escalar tu producción sin comprometer la calidad? Nuestro equipo está listo para integrarse en tu pipeline y entregar assets, animaciones y soporte de desarrollo con los más altos estándares del mercado.",
+        buttonText: "Solicitar Propuesta",
+        responseTime: "Respuesta en hasta 24 horas",
+      };
+    }
+    return {
+      label: "Para Estúdios",
+      title: "Outsourcing",
+      titleHighlight: "de Qualidade",
+      description: "Precisa escalar sua produção sem comprometer a qualidade? Nossa equipe está pronta para integrar-se ao seu pipeline e entregar assets, animações e suporte de desenvolvimento com os mais altos padrões do mercado.",
+      buttonText: "Solicitar Proposta",
+      responseTime: "Resposta em até 24 horas",
+    };
+  };
+
+  const content = getContent();
 
   return (
     <section id="outsourcing" className="relative py-32 overflow-hidden">
@@ -36,13 +71,13 @@ export default function OutsourcingSection() {
             transition={{ duration: 0.6 }}
           >
             <span className="text-[#c41e2a] text-sm tracking-[0.3em] uppercase font-semibold font-[Rajdhani]">
-              Para Estúdios
+              {content.label}
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-[Orbitron]">
-              Outsourcing <span className="text-[#c41e2a]">de Qualidade</span>
+              {content.title} <span className="text-[#c41e2a]">{content.titleHighlight}</span>
             </h2>
             <p className="mt-6 text-white/50 text-lg font-[Rajdhani] leading-relaxed">
-              Precisa escalar sua produção sem comprometer a qualidade? Nossa equipe está pronta para integrar-se ao seu pipeline e entregar assets, animações e suporte de desenvolvimento com os mais altos padrões do mercado.
+              {content.description}
             </p>
           </motion.div>
         </div>
@@ -93,10 +128,10 @@ export default function OutsourcingSection() {
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="px-8 py-3.5 bg-[#c41e2a] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#a01824] hover:shadow-[0_0_40px_rgba(196,30,42,0.4)] font-[Rajdhani]"
             >
-              Solicitar Proposta
+              {content.buttonText}
             </button>
             <span className="text-white/30 text-sm font-[Rajdhani]">
-              Resposta em até 24 horas
+              {content.responseTime}
             </span>
           </div>
         </motion.div>

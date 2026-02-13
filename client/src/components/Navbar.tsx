@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
-import { LOGO_ICON_URL, NAV_ITEMS } from "@/lib/constants";
+import { LOGO_ICON_URL, getNavItems } from "@/lib/constants";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const { language, setLanguage } = useLanguage();
+  const NAV_ITEMS = getNavItems(language);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +42,7 @@ export default function Navbar() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [language]);
 
   const scrollToSection = (href: string) => {
     const id = href.replace("#", "");

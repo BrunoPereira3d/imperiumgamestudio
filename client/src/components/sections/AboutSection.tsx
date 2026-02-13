@@ -6,9 +6,11 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { STATS } from "@/lib/constants";
 import { Sparkles } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-function StatItem({ stat, isVisible, index }: { stat: typeof STATS[0]; isVisible: boolean; index: number }) {
+function StatItem({ stat, isVisible, index, language }: { stat: typeof STATS[0]; isVisible: boolean; index: number; language: string }) {
   const count = useCountUp(stat.value, isVisible);
+  const statLabel = language === "en" ? stat.labelEn : language === "es" ? stat.labelEs : stat.label;
 
   return (
     <motion.div
@@ -21,7 +23,7 @@ function StatItem({ stat, isVisible, index }: { stat: typeof STATS[0]; isVisible
         {count}{stat.suffix}
       </div>
       <div className="mt-2 text-sm text-white/50 tracking-wider uppercase font-[Rajdhani]">
-        {stat.label}
+        {statLabel}
       </div>
     </motion.div>
   );
@@ -30,6 +32,64 @@ function StatItem({ stat, isVisible, index }: { stat: typeof STATS[0]; isVisible
 export default function AboutSection() {
   const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation({ threshold: 0.3 });
+  const { language } = useLanguage();
+
+  const getContent = () => {
+    if (language === "en") {
+      return {
+        label: "About Us",
+        title1: "From Digital World",
+        title2: "to Reality",
+        p1: "Imperium Game Studio was born from a passion for creating extraordinary worlds and visual experiences. We started as a studio specialized in 3D modeling, animation, and 3D printing, serving clients across various segments with high-quality creative solutions.",
+        p2: "Today, we have expanded our work into game development, combining our technical and artistic expertise to create interactive experiences that captivate and surprise. Our multidisciplinary team combines creative talent with technical mastery to deliver results that exceed expectations.",
+        p3: "Beyond our own projects, we offer outsourcing services to studios around the world, providing assets, animations, and development support with the quality the market demands.",
+        foundation: "Foundation",
+        foundationDesc: "Beginning of operations with focus on 3D modeling and visual services for companies and agencies.",
+        expansion: "Expansion",
+        expansionDesc: "Team expansion and inclusion of animation and 3D printing services in the portfolio.",
+        outsourcing: "Outsourcing",
+        outsourcingDesc: "Beginning of partnerships with international studios, providing assets and production support.",
+        gameStudio: "Game Studio",
+        gameStudioDesc: "New era: development of our own games and consolidation as a complete studio.",
+      };
+    }
+    if (language === "es") {
+      return {
+        label: "Quiénes Somos",
+        title1: "Del Mundo Digital",
+        title2: "a la Realidad",
+        p1: "Imperium Game Studio nació de la pasión por crear mundos y experiencias visuales extraordinarias. Comenzamos como un estudio especializado en modelado 3D, animación e impresión 3D, atendiendo clientes de diversos segmentos con soluciones creativas de alta calidad.",
+        p2: "Hoy hemos expandido nuestro trabajo al desarrollo de juegos, combinando nuestra experiencia técnica y artística para crear experiencias interactivas que cautivan y sorprenden. Nuestro equipo multidisciplinario combina talento creativo con dominio técnico para entregar resultados que superan expectativas.",
+        p3: "Más allá de nuestros propios proyectos, ofrecemos servicios de outsourcing a estudios de todo el mundo, proporcionando assets, animaciones y soporte de desarrollo con la calidad que exige el mercado.",
+        foundation: "Fundación",
+        foundationDesc: "Inicio de operaciones con enfoque en modelado 3D y servicios visuales para empresas y agencias.",
+        expansion: "Expansión",
+        expansionDesc: "Expansión del equipo e inclusión de servicios de animación e impresión 3D en el portafolio.",
+        outsourcing: "Outsourcing",
+        outsourcingDesc: "Inicio de asociaciones con estudios internacionales, proporcionando assets y soporte de producción.",
+        gameStudio: "Game Studio",
+        gameStudioDesc: "Nueva era: desarrollo de juegos propios y consolidación como estudio completo.",
+      };
+    }
+    return {
+      label: "Sobre Nós",
+      title1: "Do Mundo Digital",
+      title2: "ao Real",
+      p1: "A Imperium Game Studio nasceu da paixão por criar mundos e experiências visuais extraordinárias. Começamos como um estúdio especializado em modelagem 3D, animação e impressão 3D, atendendo clientes de diversos segmentos com soluções criativas de alta qualidade.",
+      p2: "Hoje, expandimos nossa atuação para o desenvolvimento de games, unindo nossa expertise técnica e artística para criar experiências interativas que cativam e surpreendem. Nossa equipe multidisciplinar combina talento criativo com domínio técnico para entregar resultados que superam expectativas.",
+      p3: "Além dos nossos projetos próprios, oferecemos serviços de outsourcing para estúdios ao redor do mundo, fornecendo assets, animações e suporte de desenvolvimento com a qualidade que o mercado exige.",
+      foundation: "Fundação",
+      foundationDesc: "Início das operações com foco em modelagem 3D e serviços visuais para empresas e agências.",
+      expansion: "Expansão",
+      expansionDesc: "Ampliação da equipe e inclusão de serviços de animação e impressão 3D ao portfólio.",
+      outsourcing: "Outsourcing",
+      outsourcingDesc: "Início das parcerias com estúdios internacionais, fornecendo assets e suporte de produção.",
+      gameStudio: "Game Studio",
+      gameStudioDesc: "Nova era: desenvolvimento de games próprios e consolidação como estúdio completo.",
+    };
+  };
+
+  const content = getContent();
 
   return (
     <section id="about" className="relative py-32 overflow-hidden">
@@ -47,25 +107,25 @@ export default function AboutSection() {
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="text-[#c41e2a]" size={20} />
               <span className="text-[#c41e2a] text-sm tracking-[0.3em] uppercase font-semibold font-[Rajdhani]">
-                Sobre Nós
+                {content.label}
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-[Orbitron]">
-              Do Mundo Digital
+              {content.title1}
               <br />
-              <span className="text-[#c41e2a]">ao Real</span>
+              <span className="text-[#c41e2a]">{content.title2}</span>
             </h2>
 
             <div className="mt-8 space-y-5 text-white/70 text-lg leading-relaxed font-[Rajdhani]">
               <p>
-                A <strong className="text-white">Imperium Game Studio</strong> nasceu da paixão por criar mundos e experiências visuais extraordinárias. Começamos como um estúdio especializado em modelagem 3D, animação e impressão 3D, atendendo clientes de diversos segmentos com soluções criativas de alta qualidade.
+                A <strong className="text-white">Imperium Game Studio</strong> {content.p1}
               </p>
               <p>
-                Hoje, expandimos nossa atuação para o <strong className="text-white">desenvolvimento de games</strong>, unindo nossa expertise técnica e artística para criar experiências interativas que cativam e surpreendem. Nossa equipe multidisciplinar combina talento criativo com domínio técnico para entregar resultados que superam expectativas.
+                {content.p2}
               </p>
               <p>
-                Além dos nossos projetos próprios, oferecemos serviços de <strong className="text-white">outsourcing</strong> para estúdios ao redor do mundo, fornecendo assets, animações e suporte de desenvolvimento com a qualidade que o mercado exige.
+                {content.p3}
               </p>
             </div>
           </motion.div>
@@ -87,32 +147,32 @@ export default function AboutSection() {
                 <div className="flex items-start gap-4">
                   <div className="w-3 h-3 mt-1.5 bg-[#c41e2a] rounded-full shrink-0 shadow-[0_0_10px_rgba(196,30,42,0.5)]" />
                   <div>
-                    <div className="text-[#c41e2a] font-[Orbitron] text-sm font-bold">Fundação</div>
-                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">Início das operações com foco em modelagem 3D e serviços visuais para empresas e agências.</p>
+                    <div className="text-[#c41e2a] font-[Orbitron] text-sm font-bold">{content.foundation}</div>
+                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">{content.foundationDesc}</p>
                   </div>
                 </div>
                 <div className="ml-1.5 w-[1px] h-6 bg-gradient-to-b from-[#c41e2a]/30 to-transparent" />
                 <div className="flex items-start gap-4">
                   <div className="w-3 h-3 mt-1.5 bg-[#c41e2a]/60 rounded-full shrink-0" />
                   <div>
-                    <div className="text-white/80 font-[Orbitron] text-sm font-bold">Expansão</div>
-                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">Ampliação da equipe e inclusão de serviços de animação e impressão 3D ao portfólio.</p>
+                    <div className="text-white/80 font-[Orbitron] text-sm font-bold">{content.expansion}</div>
+                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">{content.expansionDesc}</p>
                   </div>
                 </div>
                 <div className="ml-1.5 w-[1px] h-6 bg-gradient-to-b from-white/10 to-transparent" />
                 <div className="flex items-start gap-4">
                   <div className="w-3 h-3 mt-1.5 bg-[#c41e2a]/40 rounded-full shrink-0" />
                   <div>
-                    <div className="text-white/80 font-[Orbitron] text-sm font-bold">Outsourcing</div>
-                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">Início das parcerias com estúdios internacionais, fornecendo assets e suporte de produção.</p>
+                    <div className="text-white/80 font-[Orbitron] text-sm font-bold">{content.outsourcing}</div>
+                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">{content.outsourcingDesc}</p>
                   </div>
                 </div>
                 <div className="ml-1.5 w-[1px] h-6 bg-gradient-to-b from-white/10 to-transparent" />
                 <div className="flex items-start gap-4">
                   <div className="w-3 h-3 mt-1.5 bg-white rounded-full shrink-0 shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
                   <div>
-                    <div className="text-white font-[Orbitron] text-sm font-bold">Game Studio</div>
-                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">Nova era: desenvolvimento de games próprios e consolidação como estúdio completo.</p>
+                    <div className="text-white font-[Orbitron] text-sm font-bold">{content.gameStudio}</div>
+                    <p className="text-white/60 text-sm mt-1 font-[Rajdhani]">{content.gameStudioDesc}</p>
                   </div>
                 </div>
               </div>
@@ -123,7 +183,7 @@ export default function AboutSection() {
         {/* Stats */}
         <div ref={statsRef} className="mt-24 grid grid-cols-2 md:grid-cols-3 gap-8 py-12 border-t border-b border-white/5">
           {STATS.map((stat, i) => (
-            <StatItem key={stat.label} stat={stat} isVisible={statsVisible} index={i} />
+            <StatItem key={i} stat={stat} isVisible={statsVisible} index={i} language={language} />
           ))}
         </div>
       </div>

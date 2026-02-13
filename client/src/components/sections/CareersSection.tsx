@@ -1,11 +1,13 @@
-// DESIGN: Cinematic Dark Forge — Careers section with job listings
+// DESIGN: Cinematic Dark Forge — Careers section with job listings and department filters
 
 import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
 
 export default function CareersSection() {
   const { language } = useLanguage();
+  const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
 
   const getTitle = () => {
     if (language === "en") return "Join Imperium";
@@ -35,6 +37,18 @@ export default function CareersSection() {
     if (language === "en") return "Apply";
     if (language === "es") return "Solicitar";
     return "Candidatar-se";
+  };
+
+  const getFilterLabel = () => {
+    if (language === "en") return "Filter by Department";
+    if (language === "es") return "Filtrar por Departamento";
+    return "Filtrar por Departamento";
+  };
+
+  const getAllDepartments = () => {
+    if (language === "en") return "All Departments";
+    if (language === "es") return "Todos los Departamentos";
+    return "Todos os Departamentos";
   };
 
   const jobs = [
@@ -114,6 +128,14 @@ export default function CareersSection() {
     return job.pt;
   };
 
+  // Get unique departments
+  const departments = Array.from(new Set(jobs.map(job => getJobData(job).department)));
+
+  // Filter jobs based on selected department
+  const filteredJobs = selectedDepartment 
+    ? jobs.filter(job => getJobData(job).department === selectedDepartment)
+    : jobs;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -159,6 +181,42 @@ export default function CareersSection() {
           </p>
         </motion.div>
 
+        {/* Department Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mb-12 flex flex-wrap gap-3 justify-center items-center"
+        >
+          <span className="text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase">
+            {getFilterLabel()}:
+          </span>
+          <button
+            onClick={() => setSelectedDepartment(null)}
+            className={`px-4 py-2 rounded-sm text-sm font-[Rajdhani] tracking-wider uppercase transition-all duration-300 ${
+              selectedDepartment === null
+                ? "bg-[#C61331] text-white shadow-[0_0_20px_rgba(198,19,49,0.3)]"
+                : "bg-white/5 text-white/60 border border-white/10 hover:border-[#C61331]/50 hover:text-white"
+            }`}
+          >
+            {getAllDepartments()}
+          </button>
+          {departments.map((dept) => (
+            <button
+              key={dept}
+              onClick={() => setSelectedDepartment(dept)}
+              className={`px-4 py-2 rounded-sm text-sm font-[Rajdhani] tracking-wider uppercase transition-all duration-300 ${
+                selectedDepartment === dept
+                  ? "bg-[#C61331] text-white shadow-[0_0_20px_rgba(198,19,49,0.3)]"
+                  : "bg-white/5 text-white/60 border border-white/10 hover:border-[#C61331]/50 hover:text-white"
+              }`}
+            >
+              {dept}
+            </button>
+          ))}
+        </motion.div>
+
         {/* Jobs Grid */}
         <motion.div
           variants={containerVariants}
@@ -167,7 +225,7 @@ export default function CareersSection() {
           viewport={{ once: true }}
           className="grid md:grid-cols-2 gap-6"
         >
-          {jobs.map((job, index) => {
+          {filteredJobs.map((job, index) => {
             const jobData = getJobData(job);
             return (
               <motion.div

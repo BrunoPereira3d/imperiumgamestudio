@@ -27,7 +27,7 @@ export const PRINT_3D_URL = "https://files.manuscdn.com/user_upload_by_module/se
 export const DIGITAL_SOLUTIONS_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/bFPXqCGGrFEzqOMf.png";
 export const VR_TRAINING_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/ubbuyQIdcIzJvMWb.png";
 
-export const NAV_ITEMS = [
+export const NAV_ITEMS_PT = [
   { label: "Início", href: "#hero" },
   { label: "GAMES", href: "#projects" },
   { label: "Serviços B2B", href: "#outsourcing" },
@@ -37,40 +37,93 @@ export const NAV_ITEMS = [
   { label: "Contato", href: "#contact" },
 ];
 
+export const NAV_ITEMS_EN = [
+  { label: "Home", href: "#hero" },
+  { label: "GAMES", href: "#projects" },
+  { label: "B2B Services", href: "#outsourcing" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "About Us", href: "#about" },
+  { label: "Careers", href: "#careers" },
+  { label: "Contact", href: "#contact" },
+];
+
+export const NAV_ITEMS_ES = [
+  { label: "Inicio", href: "#hero" },
+  { label: "JUEGOS", href: "#projects" },
+  { label: "Servicios B2B", href: "#outsourcing" },
+  { label: "Portafolio", href: "#portfolio" },
+  { label: "Quiénes Somos", href: "#about" },
+  { label: "Carreras", href: "#careers" },
+  { label: "Contacto", href: "#contact" },
+];
+
+// Helper function to get nav items based on language
+export const getNavItems = (language: string) => {
+  if (language === "en") return NAV_ITEMS_EN;
+  if (language === "es") return NAV_ITEMS_ES;
+  return NAV_ITEMS_PT;
+};
+
+export const NAV_ITEMS = NAV_ITEMS_PT;
+
 export const SERVICES = [
   {
     title: "Desenvolvimento de Games",
+    titleEn: "Game Development",
+    titleEs: "Desarrollo de Juegos",
     description: "Criamos experiências interativas memoráveis, desde a concepção até o lançamento. Nosso time domina engines como Unreal e Unity para entregar jogos de alta qualidade.",
+    descriptionEn: "We create memorable interactive experiences, from conception to launch. Our team masters engines like Unreal and Unity to deliver high-quality games.",
+    descriptionEs: "Creamos experiencias interactivas memorables, desde la concepción hasta el lanzamiento. Nuestro equipo domina motores como Unreal y Unity para entregar juegos de alta calidad.",
     icon: "gamepad",
     image: GAME_DEV_URL,
   },
   {
     title: "Modelagem 3D",
+    titleEn: "3D Modeling",
+    titleEs: "Modelado 3D",
     description: "Modelagem de personagens, cenários, props e assets com qualidade AAA. Trabalhamos com hard-surface, orgânico e estilizado para atender qualquer demanda.",
+    descriptionEn: "Character, environment, prop and asset modeling with AAA quality. We work with hard-surface, organic and stylized to meet any demand.",
+    descriptionEs: "Modelado de personajes, entornos, props y assets con calidad AAA. Trabajamos con hard-surface, orgánico y estilizado para satisfacer cualquier demanda.",
     icon: "cube",
     image: SERVICES_3D_URL,
   },
   {
     title: "Animação",
+    titleEn: "Animation",
+    titleEs: "Animación",
     description: "Damos vida aos seus projetos com animações fluidas e expressivas. De cutscenes cinematográficas a animações de gameplay, cobrimos todo o espectro.",
+    descriptionEn: "We bring your projects to life with smooth and expressive animations. From cinematic cutscenes to gameplay animations, we cover the full spectrum.",
+    descriptionEs: "Damos vida a tus proyectos con animaciones fluidas y expresivas. Desde cinemáticas cinematográficas hasta animaciones de gameplay, cubrimos todo el espectro.",
     icon: "film",
     image: ANIMATION_URL,
   },
   {
     title: "Impressão 3D",
+    titleEn: "3D Printing",
+    titleEs: "Impresión 3D",
     description: "Transformamos modelos digitais em objetos físicos de alta fidelidade. Ideal para protótipos, maquetes, colecionáveis e peças personalizadas.",
+    descriptionEn: "We transform digital models into high-fidelity physical objects. Ideal for prototypes, maquettes, collectibles and custom pieces.",
+    descriptionEs: "Transformamos modelos digitales en objetos físicos de alta fidelidad. Ideal para prototipos, maquetas, coleccionables y piezas personalizadas.",
     icon: "printer",
     image: PRINT_3D_URL,
   },
   {
     title: "Soluções Digitais",
+    titleEn: "Digital Solutions",
+    titleEs: "Soluciones Digitales",
     description: "Desenvolvemos aplicações web e mobile sob medida para transformar sua visão em realidade. De MVPs até plataformas escaláveis, entregamos soluções que crescem com seu negócio.",
+    descriptionEn: "We develop custom web and mobile applications to turn your vision into reality. From MVPs to scalable platforms, we deliver solutions that grow with your business.",
+    descriptionEs: "Desarrollamos aplicaciones web y móviles personalizadas para convertir tu visión en realidad. Desde MVPs hasta plataformas escalables, entregamos soluciones que crecen con tu negocio.",
     icon: "smartphone",
     image: DIGITAL_SOLUTIONS_URL,
   },
   {
     title: "Treinamento VR",
+    titleEn: "VR Training",
+    titleEs: "Capacitación VR",
     description: "Experiências imersivas de realidade virtual para treinamento corporativo. Prepare suas equipes com simulações realistas que aumentam retenção e efetividade do aprendizado.",
+    descriptionEn: "Immersive virtual reality experiences for corporate training. Prepare your teams with realistic simulations that increase retention and learning effectiveness.",
+    descriptionEs: "Experiencias inmersivas de realidad virtual para capacitación corporativa. Prepara tus equipos con simulaciones realistas que aumentan la retención y efectividad del aprendizaje.",
     icon: "headphones",
     image: VR_TRAINING_URL,
   },
@@ -79,27 +132,51 @@ export const SERVICES = [
 export const OUTSOURCING_FEATURES = [
   {
     title: "Equipe Dedicada",
+    titleEn: "Dedicated Team",
+    titleEs: "Equipo Dedicado",
     description: "Alocamos profissionais especializados exclusivamente para o seu projeto, garantindo foco e consistência na entrega.",
+    descriptionEn: "We allocate specialized professionals exclusively for your project, ensuring focus and consistency in delivery.",
+    descriptionEs: "Asignamos profesionales especializados exclusivamente para tu proyecto, garantizando enfoque y consistencia en la entrega.",
   },
   {
     title: "Pipeline Integrado",
+    titleEn: "Integrated Pipeline",
+    titleEs: "Pipeline Integrado",
     description: "Nos adaptamos ao seu pipeline de produção, ferramentas e metodologias para uma integração transparente.",
+    descriptionEn: "We adapt to your production pipeline, tools and methodologies for seamless integration.",
+    descriptionEs: "Nos adaptamos a tu pipeline de producción, herramientas y metodologías para una integración sin problemas.",
   },
   {
     title: "Escalabilidade",
+    titleEn: "Scalability",
+    titleEs: "Escalabilidad",
     description: "Aumente ou reduza a equipe conforme a demanda do projeto, sem os custos fixos de contratação permanente.",
+    descriptionEn: "Scale your team up or down based on project demand, without fixed permanent hiring costs.",
+    descriptionEs: "Escala tu equipo hacia arriba o hacia abajo según la demanda del proyecto, sin costos fijos de contratación permanente.",
   },
   {
     title: "Qualidade AAA",
+    titleEn: "AAA Quality",
+    titleEs: "Calidad AAA",
     description: "Padrões rigorosos de qualidade em cada entrega, com revisões iterativas e comunicação constante.",
+    descriptionEn: "Rigorous quality standards in every delivery, with iterative reviews and constant communication.",
+    descriptionEs: "Estándares de calidad rigurosos en cada entrega, con revisiones iterativas y comunicación constante.",
   },
   {
     title: "NDA & Segurança",
+    titleEn: "NDA & Security",
+    titleEs: "NDA y Seguridad",
     description: "Protocolos rígidos de confidencialidade e segurança de dados para proteger sua propriedade intelectual.",
+    descriptionEn: "Strict confidentiality and data security protocols to protect your intellectual property.",
+    descriptionEs: "Protocolos estrictos de confidencialidad y seguridad de datos para proteger tu propiedad intelectual.",
   },
   {
     title: "Comunicação Ágil",
+    titleEn: "Agile Communication",
+    titleEs: "Comunicación Ágil",
     description: "Reuniões regulares, relatórios de progresso e canais diretos para manter seu projeto sempre no trilho.",
+    descriptionEn: "Regular meetings, progress reports and direct channels to keep your project on track.",
+    descriptionEs: "Reuniones regulares, informes de progreso y canales directos para mantener tu proyecto en el camino correcto.",
   },
 ];
 
@@ -109,16 +186,24 @@ export const PROJECTS = [
     title: "Ghouls Next Door",
     genre: "Tower Defense",
     description: "Neste game você controla os monstros! Proteja seu descanso eterno posicionando hordas de criaturas simpáticas para impedir que aldeões enfurecidos destruam a necrópole.",
+    descriptionEn: "In this game you control the monsters! Protect your eternal rest by positioning hordes of friendly creatures to prevent angry villagers from destroying the necropolis.",
+    descriptionEs: "¡En este juego controlas los monstruos! Protege tu descanso eterno posicionando hordas de criaturas amigables para evitar que los aldeanos furiosos destruyan la necrópolis.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QAwGxEaluRsgkelB.png",
     status: "Em Desenvolvimento",
+    statusEn: "In Development",
+    statusEs: "En Desarrollo",
   },
   {
     id: 2,
     title: "Project Neblina",
     genre: "Anomaly Finder",
     description: "Uma corrida desesperada pela sobrevivência na linha vicinal abandonada de Paranapiacaba. Entidades sobrenaturais testam sua atenção e coragem em meio à neblina eterna. Cada detalhe importa. Cada erro pode ser seu último.",
+    descriptionEn: "A desperate race for survival on the abandoned branch line of Paranapiacaba. Supernatural entities test your attention and courage amid eternal mist. Every detail matters. Every mistake could be your last.",
+    descriptionEs: "Una carrera desesperada por la supervivencia en la línea ramal abandonada de Paranapiacaba. Entidades sobrenaturales ponen a prueba tu atención y coraje en medio de la niebla eterna. Cada detalle importa. Cada error podría ser el último.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cOUGJyqspFYMtPWv.png",
     status: "Em Desenvolvimento",
+    statusEn: "In Development",
+    statusEs: "En Desarrollo",
   },
 ];
 
@@ -127,34 +212,50 @@ export const PORTFOLIO_WORKS = [
     id: 1,
     title: "Viking Low-Poly",
     category: "Modelagem 3D",
+    categoryEn: "3D Modeling",
+    categoryEs: "Modelado 3D",
     description: "Criação de assets otimizados com estética 'paper-craft' única para jogos mobile ou indie.",
+    descriptionEn: "Creation of optimized assets with unique 'paper-craft' aesthetic for mobile or indie games.",
+    descriptionEs: "Creación de assets optimizados con estética 'paper-craft' única para juegos móviles o indie.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/ScbkOfuedSckVuUe.png",
   },
   {
     id: 2,
     title: "Expressão Goblin",
     category: "Modelagem 3D",
+    categoryEn: "3D Modeling",
+    categoryEs: "Modelado 3D",
     description: "Modelagem facial de alta frequência e texturização de pele para NPCs com personalidade.",
+    descriptionEn: "High-frequency facial modeling and skin texturing for NPCs with personality.",
+    descriptionEs: "Modelado facial de alta frecuencia y texturización de piel para NPCs con personalidad.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/pqDWxBLWVBKryCnd.png",
   },
   {
     id: 3,
     title: "Cavaleiro Marshmallow",
     category: "Modelagem 3D",
+    categoryEn: "3D Modeling",
+    categoryEs: "Modelado 3D",
     description: "Renderização de materiais complexos e iluminação atmosférica para cenários de fantasia.",
+    descriptionEn: "Rendering of complex materials and atmospheric lighting for fantasy scenarios.",
+    descriptionEs: "Renderización de materiales complejos e iluminación atmosférica para escenarios de fantasía.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QmIqyBmOgliSdapx.png",
   },
   {
     id: 4,
     title: "Mago Estilizado",
     category: "Modelagem 3D",
+    categoryEn: "3D Modeling",
+    categoryEs: "Modelado 3D",
     description: "Estudo de personagem com foco em texturização de tecido e madeira. Design carismático pronto para rigging.",
+    descriptionEn: "Character study focusing on fabric and wood texturing. Charismatic design ready for rigging.",
+    descriptionEs: "Estudio de personaje enfocado en texturización de tela y madera. Diseño carismático listo para rigging.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cZrJzablDiMELNzw.png",
   },
 ];
 
 export const STATS = [
-  { value: 50, suffix: "+", label: "Projetos Entregues" },
-  { value: 8, suffix: "+", label: "Anos de Experiência" },
-  { value: 15, suffix: "+", label: "Clientes Ativos" },
+  { value: 50, suffix: "+", label: "Projetos Entregues", labelEn: "Projects Delivered", labelEs: "Proyectos Entregados" },
+  { value: 8, suffix: "+", label: "Anos de Experiência", labelEn: "Years of Experience", labelEs: "Años de Experiencia" },
+  { value: 15, suffix: "+", label: "Clientes Ativos", labelEn: "Active Clients", labelEs: "Clientes Activos" },
 ];
