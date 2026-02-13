@@ -94,16 +94,11 @@ export default function PortfolioSection() {
                   </div>
 
                   {/* Description Hover Effect - Slides up from bottom */}
-                  <motion.div
-                    initial={{ y: 100, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none"
-                  >
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
                       {language === "en" ? work.descriptionEn : language === "es" ? work.descriptionEs : work.description}
                     </p>
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Content */}
