@@ -32,11 +32,11 @@ export default function CareersSection() {
   };
   const jobs = [
     {
-      title: "Desenvolvedor de Games (Unity/Unreal)",
+      title: "Desenvolvedor de Games Unreal",
       department: "Desenvolvimento",
       location: "São Paulo, SP",
       type: "Tempo Integral",
-      description: "Buscamos desenvolvedores experientes em C# ou C++ para trabalhar em projetos AAA e indie.",
+      description: "Buscamos desenvolvedores experientes em C++ para trabalhar em projetos AAA com Unreal Engine.",
     },
     {
       title: "Artista 3D - Modelagem",
