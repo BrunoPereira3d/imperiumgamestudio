@@ -81,13 +81,13 @@ export default function PortfolioSection() {
                       e.stopPropagation();
                       setSelectedWork(work.id);
                     }}
-                    className="absolute top-2 right-2 p-2 bg-[#C61331] text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#A00D24] hover:scale-110"
+                    className="absolute top-2 right-2 p-2 bg-[#C61331] text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#A00D24] hover:scale-110 z-10"
                   >
                     <Maximize2 size={16} />
                   </button>
 
                   {/* Category Badge */}
-                  <div className="absolute bottom-2 left-2">
+                  <div className="absolute bottom-2 left-2 z-10">
                     <span className="px-2 py-1 bg-[#C61331]/20 border border-[#C61331]/50 text-[#C61331] text-xs font-bold tracking-wider rounded-full font-[Rajdhani]">
                       {language === "en" ? work.categoryEn : language === "es" ? work.categoryEs : work.category}
                     </span>
@@ -98,7 +98,7 @@ export default function PortfolioSection() {
                     initial={{ y: 100, opacity: 0 }}
                     whileHover={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent"
+                    className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pointer-events-none"
                   >
                     <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
                       {language === "en" ? work.descriptionEn : language === "es" ? work.descriptionEs : work.description}
@@ -107,7 +107,7 @@ export default function PortfolioSection() {
                 </div>
 
                 {/* Content */}
-                <div className="p-4">
+                <div className="p-4 pointer-events-auto">
                   <h3 className="text-sm font-bold text-white mb-1 font-[Orbitron] truncate">
                     {work.title}
                   </h3>
