@@ -5,3 +5,6 @@
 
 - [x] Mover botões Discord e LinkedIn para seção de contato ao lado do Instagram
 - [x] Adicionar botão Instagram no rodapé
+
+- [x] Adicionar botões Discord e LinkedIn no rodapé (manter em ambos os lugares)
+- [x] Mover aviso de propriedade intelectual para depois dos botões sociais
