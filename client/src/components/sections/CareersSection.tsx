@@ -219,17 +219,17 @@ export default function CareersSection() {
 
         {/* Jobs Grid */}
         <motion.div
+          key={selectedDepartment || 'all'}
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate="visible"
           className="grid md:grid-cols-2 gap-6"
         >
           {filteredJobs.map((job, index) => {
             const jobData = getJobData(job);
             return (
               <motion.div
-                key={index}
+                key={`${selectedDepartment}-${index}`}
                 variants={itemVariants}
                 className="group p-6 bg-gradient-to-br from-white/5 to-white/2 border border-white/10 rounded-sm hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.2)]"
               >
