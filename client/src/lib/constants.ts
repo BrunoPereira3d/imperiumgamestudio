@@ -8,6 +8,9 @@ export const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/sessio
 export const LOGO_ICON_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/eopMjBNWAWSOuKSz.png";
 export const LOGO_ORIGINAL_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/eopMjBNWAWSOuKSz.png";
 
+// Primary brand color
+export const PRIMARY_COLOR = "#C61331";
+
 export const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-1_1770588216000_na1fn_aGVyby1iZw.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTFfMTc3MDU4ODIxNjAwMF9uYTFmbl9hR1Z5YnkxaVp3LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=I8v-s5mPJY9TNEeBxs1BO1uIhB6xRood1K6mJex4ZB1zCjZXua88WDyhYt5Mz1tKqrOPRP7bWqOFeI~LjOkYVQqbwVQ-cH7hNIFNRPqt26fSmFAIZawltFAlxK7VajpCOINfH29xUcg1fPyG3rQIZYrFoOC5uNR7JJ911s~8PrjeLHusXiDVJmOiDopFqNZ-8SJ0s2VdqYhHwx5GKHR2RN1lid1yu7vuq6gsQMD0Hormo6ZEeQozgmHXnwBPmZPouO40XcMSUKIydC6mILuNfROsq4sBAxVOFoAjM0QzvT3TcLLqkE0Qz1sKVoQT8OJIr6at4t0Rk34H-AVVHM4VfA__";
 
 export const SERVICES_3D_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-2_1770588203000_na1fn_c2VydmljZXMtM2Q.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTJfMTc3MDU4ODIwMzAwMF9uYTFmbl9jMlZ5ZG1salpYTXRNMlEuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=RQ-nDWqUn6~8r1bLZNhJDSYoldd65WoVmMPbKJygzQDWAPEsRoVvLQkf~FxSnNSWnwAc~2osp0Zu3jIbyQDpeJWf5QF4Q2K863J9aHb2LMxfhnyWg0RkSwTzw8XpH3tQHmpM1x3EsVpl2HUMym31U8NN0C~sTI41FFtqiznyEsAzf8a9IVKMj9huRiw9W9Ue0Ze8Eb3ZXyCPuAFqmD0gH7C53OR0Qhcb35ZHjxfBVRDbrHQ2i9VideL1VP4prXS7UC8jbOBR6EwgBdRzBuaMgrXh3r43ZbazL0HZ11QXKVV7-3RiHxAWifThWl~2TRwYpuEhmVZVIqCpOztVYDdqTw__";
@@ -104,7 +107,7 @@ export const PROJECTS = [
     id: 1,
     title: "Ghouls Next Door",
     genre: "Tower Defense",
-    description: "Um game estilo tower defense com uma narrativa invertida. Monstros se defendem contra aldeões que querem destruir a necrópole. Prepare-se para uma experiência única onde você protege seu lar das forças da destruição.",
+    description: "Neste game você controla os monstros! Proteja seu descanso eterno posicionando hordas de criaturas simpáticas para impedir que aldeões enfurecidos destruam a necrópole.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QAwGxEaluRsgkelB.png",
     status: "Em Desenvolvimento",
   },
@@ -112,7 +115,7 @@ export const PROJECTS = [
     id: 2,
     title: "Project Neblina",
     genre: "Anomaly Finder",
-    description: "Um game no estilo encontrar anomalias de corredor infinito. Uma entidade testará sua atenção e coragem a todo momento. Cada detalhe importa. Cada erro pode ser seu último.",
+    description: "Uma corrida desesperada pela sobrevivência na linha vicinal abandonada de Paranapiacaba. Entidades sobrenaturais testam sua atenção e coragem em meio à neblina eterna. Cada detalhe importa. Cada erro pode ser seu último.",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cOUGJyqspFYMtPWv.png",
     status: "Em Desenvolvimento",
   },
