@@ -86,6 +86,8 @@ export default function OutsourcingSection() {
         <div ref={gridRef} className="mt-20 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {OUTSOURCING_FEATURES.map((feature, i) => {
             const Icon = featureIcons[i];
+            const featureTitle = language === "en" ? feature.titleEn : language === "es" ? feature.titleEs : feature.title;
+            const featureDesc = language === "en" ? feature.descriptionEn : language === "es" ? feature.descriptionEs : feature.description;
             return (
               <motion.div
                 key={feature.title}
@@ -100,10 +102,10 @@ export default function OutsourcingSection() {
                 </div>
 
                 <h3 className="text-lg font-bold text-white font-[Orbitron] tracking-wide">
-                  {feature.title}
+                  {featureTitle}
                 </h3>
                 <p className="mt-2 text-white/50 text-sm leading-relaxed font-[Rajdhani]">
-                  {feature.description}
+                  {featureDesc}
                 </p>
 
                 {/* Corner accent */}

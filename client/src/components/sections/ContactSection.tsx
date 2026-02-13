@@ -133,7 +133,7 @@ export default function ContactSection() {
           company: formData.company,
           subject: formData.subject,
           message: formData.message,
-          _to: "brunopereira@imperiumgamestudio.com",
+          _to: "brunopereira3d@icloud.com",
         }),
       });
 
@@ -180,8 +180,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("email")}</div>
-                  <a href="mailto:brunopereira@imperiumgamestudio.com" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
-                    brunopereira@imperiumgamestudio.com
+                  <a href="mailto:brunopereira3d@icloud.com" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
+                    brunopereira3d@icloud.com
                   </a>
                 </div>
               </div>
@@ -280,17 +280,17 @@ export default function ContactSection() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300"
+                    className="w-full bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white font-[Rajdhani] focus:border-[#C61331]/50 focus:outline-none transition-colors duration-300 [&>option]:bg-[#1a1a1a] [&>option]:text-white"
                   >
-                    <option value="">{getLabel("selecioneAssunto")}</option>
-                    <option value="Desenvolvimento de Games">{getLabel("desenvolvimento")}</option>
-                    <option value="Modelagem 3D">{getLabel("modelagem")}</option>
-                    <option value="Animação">{getLabel("animacao")}</option>
-                    <option value="Impressão 3D">{getLabel("impressao")}</option>
-                    <option value="Soluções Digitais">{getLabel("solucoes")}</option>
-                    <option value="Treinamento VR">{getLabel("treinamento")}</option>
-                    <option value="Outsourcing">{getLabel("outsourcing")}</option>
-                    <option value="Outro">{getLabel("outro")}</option>
+                    <option value="" className="bg-[#1a1a1a] text-white">{getLabel("selecioneAssunto")}</option>
+                    <option value="Desenvolvimento de Games" className="bg-[#1a1a1a] text-white">{getLabel("desenvolvimento")}</option>
+                    <option value="Modelagem 3D" className="bg-[#1a1a1a] text-white">{getLabel("modelagem")}</option>
+                    <option value="Animação" className="bg-[#1a1a1a] text-white">{getLabel("animacao")}</option>
+                    <option value="Impressão 3D" className="bg-[#1a1a1a] text-white">{getLabel("impressao")}</option>
+                    <option value="Soluções Digitais" className="bg-[#1a1a1a] text-white">{getLabel("solucoes")}</option>
+                    <option value="Treinamento VR" className="bg-[#1a1a1a] text-white">{getLabel("treinamento")}</option>
+                    <option value="Outsourcing" className="bg-[#1a1a1a] text-white">{getLabel("outsourcing")}</option>
+                    <option value="Outro" className="bg-[#1a1a1a] text-white">{getLabel("outro")}</option>
                   </select>
                 </div>
               </div>

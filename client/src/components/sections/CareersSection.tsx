@@ -132,7 +132,7 @@ export default function CareersSection() {
   const departments = Array.from(new Set(jobs.map(job => getJobData(job).department)));
 
   // Filter jobs based on selected department
-  const filteredJobs = selectedDepartment 
+  const filteredJobs = selectedDepartment && selectedDepartment !== getAllDepartments()
     ? jobs.filter(job => getJobData(job).department === selectedDepartment)
     : jobs;
 
@@ -261,7 +261,7 @@ export default function CareersSection() {
                 </div>
 
                 <a
-                  href="mailto:brunopereira@imperiumgamestudio.com"
+                  href="mailto:brunopereira3d@icloud.com"
                   className="w-full px-4 py-2 bg-[#C61331]/10 border border-[#C61331]/50 text-[#C61331] text-sm font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#C61331] hover:text-white group-hover:shadow-[0_0_20px_rgba(198,19,49,0.3)] inline-block text-center font-[Rajdhani]"
                 >
                   {getCandidatar()}
@@ -283,7 +283,7 @@ export default function CareersSection() {
             {getNaoEncontrou()}
           </p>
           <a
-            href="mailto:brunopereira@imperiumgamestudio.com"
+            href="mailto:brunopereira3d@icloud.com"
             className="inline-block px-8 py-3 bg-[#C61331] text-white font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_30px_rgba(198,19,49,0.3)] font-[Rajdhani]"
           >
             {getEnviarCurriculo()}

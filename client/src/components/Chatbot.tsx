@@ -15,7 +15,7 @@ interface Message {
 const COMPANY_KNOWLEDGE = {
   services: "Oferecemos Desenvolvimento de Games, Modelagem 3D, Animação, Impressão 3D, Soluções Digitais e Treinamento VR. Qual desses serviços te interessa?",
   projects: "Estamos desenvolvendo dois projetos incríveis: Ghouls Next Door (Tower Defense com narrativa invertida) e Project Neblina (Anomaly Finder em corredor infinito).",
-  contact: "Você pode nos contatar em brunopereira@imperiumgamestudio.com ou pelo telefone +55 (11) 2110-5658. Endereço: Avenida Paulista, 1636, Sala 1105, São Paulo-SP.",
+  contact: "Você pode nos contatar em brunopereira3d@icloud.com ou pelo telefone +55 (11) 2110-5658. Endereço: Avenida Paulista, 1636, Sala 1105, São Paulo-SP.",
   experience: "Temos mais de 8 anos de experiência, 50+ projetos entregues, 30+ profissionais e 15+ clientes ativos.",
   outsourcing: "Oferecemos serviços de outsourcing com equipe dedicada, pipeline integrado, escalabilidade, qualidade AAA, NDA & segurança, e comunicação ágil.",
   portfolio: "Nosso portfólio inclui trabalhos em modelagem 3D, animação e design. Confira a seção Portfólio para ver nossos melhores trabalhos.",
