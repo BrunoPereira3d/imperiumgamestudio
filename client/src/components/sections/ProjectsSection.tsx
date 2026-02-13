@@ -62,7 +62,7 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300">
+              <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,19,49,0.5),inset_0_0_30px_rgba(198,19,49,0.1)]">
                 {/* Image Container */}
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -83,14 +83,14 @@ export default function ProjectsSection() {
                   </button>
 
                   {/* Status Badge */}
-                  <div className="absolute bottom-4 left-4 z-10">
+                  <div className="absolute top-4 left-4 z-10">
                     <span className="px-3 py-1 bg-[#C61331]/20 border border-[#C61331]/50 text-[#C61331] text-xs font-bold tracking-wider rounded-full font-[Rajdhani]">
                       {language === "en" ? project.statusEn : language === "es" ? project.statusEs : project.status}
                     </span>
                   </div>
 
                   {/* Description Hover Effect - Slides up from bottom */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none translate-y-4 group-hover:translate-y-0">
                     <p className="text-white/90 text-sm leading-relaxed font-[Rajdhani]">
                       {language === "en" ? project.descriptionEn : language === "es" ? project.descriptionEs : project.description}
                     </p>

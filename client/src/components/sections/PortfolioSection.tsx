@@ -62,7 +62,7 @@ export default function PortfolioSection() {
               viewport={{ once: true }}
               className="group relative"
             >
-              <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300 cursor-pointer"
+              <div className="relative overflow-hidden rounded-lg bg-[#1a1a1a] border border-white/10 hover:border-[#C61331]/50 transition-all duration-300 cursor-pointer hover:shadow-[0_0_30px_rgba(198,19,49,0.5),inset_0_0_30px_rgba(198,19,49,0.1)]"
                 onClick={() => setSelectedWork(work.id)}>
                 {/* Image Container */}
                 <div className="relative h-48 overflow-hidden">
@@ -87,14 +87,14 @@ export default function PortfolioSection() {
                   </button>
 
                   {/* Category Badge */}
-                  <div className="absolute bottom-2 left-2 z-10">
+                  <div className="absolute top-2 left-2 z-10">
                     <span className="px-2 py-1 bg-[#C61331]/20 border border-[#C61331]/50 text-[#C61331] text-xs font-bold tracking-wider rounded-full font-[Rajdhani]">
                       {language === "en" ? work.categoryEn : language === "es" ? work.categoryEs : work.category}
                     </span>
                   </div>
 
                   {/* Description Hover Effect - Slides up from bottom */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none translate-y-4 group-hover:translate-y-0">
                     <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
                       {language === "en" ? work.descriptionEn : language === "es" ? work.descriptionEs : work.description}
                     </p>
