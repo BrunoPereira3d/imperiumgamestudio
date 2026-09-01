@@ -4,13 +4,28 @@ import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
-import JobApplicationForm from "@/components/JobApplicationForm";
+
+const CAREERS_EMAIL = "brunopereira3d@icloud.com";
+
+const buildApplicationMailto = (position: string, language: string) => {
+  const subject =
+    language === "en"
+      ? `Application: ${position}`
+      : language === "es"
+        ? `Postulación: ${position}`
+        : `Candidatura: ${position}`;
+  const body =
+    language === "en"
+      ? `Hi Imperium Game Studio team,\n\nI'd like to apply for the ${position} position. Please find my resume attached.\n\nName:\nPhone:\nPortfolio:\n`
+      : language === "es"
+        ? `Hola equipo de Imperium Game Studio,\n\nMe gustaría postularme para la posición de ${position}. Adjunto mi currículum.\n\nNombre:\nTeléfono:\nPortafolio:\n`
+        : `Olá, equipe da Imperium Game Studio,\n\nGostaria de me candidatar à vaga de ${position}. Segue meu currículo em anexo.\n\nNome:\nTelefone:\nPortfólio:\n`;
+  return `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+};
 
 export default function CareersSection() {
   const { language } = useLanguage();
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
-  const [showApplicationForm, setShowApplicationForm] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState("");
 
   // Add JobPosting schema markup for Google Jobs
   useEffect(() => {
@@ -302,15 +317,12 @@ export default function CareersSection() {
                   </p>
 
                   {/* CTA Button */}
-                  <button
-                    onClick={() => {
-                      setSelectedPosition(jobData.title);
-                      setShowApplicationForm(true);
-                    }}
+                  <a
+                    href={buildApplicationMailto(jobData.title, language)}
                     className="inline-flex items-center justify-center gap-2 w-full bg-[#C61331] hover:bg-[#ff4444] text-white font-[Rajdhani] font-semibold py-3 rounded-sm transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(198,19,49,0.4)]"
                   >
                     {getCandidatar()}
-                  </button>
+                  </a>
                 </div>
               </motion.div>
             );
@@ -336,14 +348,6 @@ export default function CareersSection() {
           </a>
         </motion.div>
       </div>
-
-      {/* Application Form Modal */}
-      {showApplicationForm && (
-        <JobApplicationForm
-          position={selectedPosition}
-          onClose={() => setShowApplicationForm(false)}
-        />
-      )}
     </section>
   );
 }
