@@ -3,7 +3,7 @@ Allow: /
 Disallow: /admin
 Disallow: /private
 
-Sitemap: https://imperiumgamestudio.com/sitemap.xml
+Sitemap: https://imperiumgamestudio.com.br/sitemap.xml
 
 # Google-specific
 User-agent: Googlebot

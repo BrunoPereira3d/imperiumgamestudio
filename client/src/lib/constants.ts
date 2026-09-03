@@ -4,28 +4,25 @@
 // Typography: Orbitron (display) + Rajdhani (body)
 // ============================================================
 
-export const LOGO_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/eopMjBNWAWSOuKSz.png";
-export const LOGO_ICON_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/eopMjBNWAWSOuKSz.png";
-export const LOGO_ORIGINAL_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/eopMjBNWAWSOuKSz.png";
+export const LOGO_URL = "/assets/logo-horizontal.webp";
+export const LOGO_ICON_URL = "/assets/logo-icon.webp";
+export const LOGO_ORIGINAL_URL = "/assets/logo-stacked.webp";
 
 // Primary brand color
 export const PRIMARY_COLOR = "#C61331";
 
-export const HERO_BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-1_1770588216000_na1fn_aGVyby1iZw.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTFfMTc3MDU4ODIxNjAwMF9uYTFmbl9hR1Z5YnkxaVp3LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=I8v-s5mPJY9TNEeBxs1BO1uIhB6xRood1K6mJex4ZB1zCjZXua88WDyhYt5Mz1tKqrOPRP7bWqOFeI~LjOkYVQqbwVQ-cH7hNIFNRPqt26fSmFAIZawltFAlxK7VajpCOINfH29xUcg1fPyG3rQIZYrFoOC5uNR7JJ911s~8PrjeLHusXiDVJmOiDopFqNZ-8SJ0s2VdqYhHwx5GKHR2RN1lid1yu7vuq6gsQMD0Hormo6ZEeQozgmHXnwBPmZPouO40XcMSUKIydC6mILuNfROsq4sBAxVOFoAjM0QzvT3TcLLqkE0Qz1sKVoQT8OJIr6at4t0Rk34H-AVVHM4VfA__";
+export const HERO_BG_URL = "/assets/hero-bg.webp";
 
-export const SERVICES_3D_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-2_1770588203000_na1fn_c2VydmljZXMtM2Q.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTJfMTc3MDU4ODIwMzAwMF9uYTFmbl9jMlZ5ZG1salpYTXRNMlEuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=RQ-nDWqUn6~8r1bLZNhJDSYoldd65WoVmMPbKJygzQDWAPEsRoVvLQkf~FxSnNSWnwAc~2osp0Zu3jIbyQDpeJWf5QF4Q2K863J9aHb2LMxfhnyWg0RkSwTzw8XpH3tQHmpM1x3EsVpl2HUMym31U8NN0C~sTI41FFtqiznyEsAzf8a9IVKMj9huRiw9W9Ue0Ze8Eb3ZXyCPuAFqmD0gH7C53OR0Qhcb35ZHjxfBVRDbrHQ2i9VideL1VP4prXS7UC8jbOBR6EwgBdRzBuaMgrXh3r43ZbazL0HZ11QXKVV7-3RiHxAWifThWl~2TRwYpuEhmVZVIqCpOztVYDdqTw__";
-
-export const GAME_DEV_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-3_1770588206000_na1fn_Z2FtZS1kZXY.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTNfMTc3MDU4ODIwNjAwMF9uYTFmbl9aMkZ0WlMxa1pYWS5qcGc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=eGGM-1uuxCOkdHXGmMbg2J1thFl0FolhrRMxo1hhAiB8mwqTci6A0gdf2juBa7hdBlqN6IKSIZhxFdm7jkWpyG1T40f6Q7z9lUfB8TsGnu9BukiO3wZ3ttIZn7a~r4uzEK9MlMGZ2cPubJEj5L27IwKxgOCkpOGeMX1euBhxdyel0Uo4eaQi-sgYxR7tH1kNFILEucOgZbS1z8iZPt71q8gZlvhhPK1wptFnCyEqouhKGMAFWTzkAMH4ofZN-tA2zkYkSq9rgvtwo0O1Es8vMpigbmrpcwc-SqAf0dm2lEC-hhdcof7jgkqeQs7qdEjbEkhd-vShF7RIaP-Ql39u8w__";
-
-export const OUTSOURCING_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-4_1770588215000_na1fn_b3V0c291cmNpbmc.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTRfMTc3MDU4ODIxNTAwMF9uYTFmbl9iM1YwYzI5MWNtTnBibWMuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=CBBtSVCWOUtN8XNFwYT8~ZICQcQUdkdGyimEMBpFoRhyT8-8sdk-peeTbghbXxFKG-jg-pcR7Q-oKTT-1rBUlcwlJrmivWXb4TjwJllQAnT2j1sUkJhStBHEe2C4h7bSKWECQ6isPjAevBLIhtzhdffKKyavbXApXkIihmRBbnI~OJkSrarpswwaGdX5ehdX71lb-Qa-1bEm8yRnbvyngLDNVuu4mOwD4RQ0k8UVcUUajkvgCnWCbIQ0Q8Nkt-Grb3NR7Qsj~Fz2cJPlC9LwNt1f20JowkEVjE1kdtj3yFTAr8UJOmwsUd7eX-vVPqZw66I0BrdX2PHylXU9WjVb4w__";
-
-export const PORTFOLIO_URL = "https://private-us-east-1.manuscdn.com/sessionFile/wFMqJmDXFrKMYoCry4fYbt/sandbox/vM6CBDREcMeZrVWbxCx78E-img-5_1770588207000_na1fn_cG9ydGZvbGlvLXNob3djYXNl.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvd0ZNcUptRFhGcktNWW9Dcnk0ZllidC9zYW5kYm94L3ZNNkNCRFJFY01lWnJWV2J4Q3g3OEUtaW1nLTVfMTc3MDU4ODIwNzAwMF9uYTFmbl9jRzl5ZEdadmJHbHZMWE5vYjNkallYTmwuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=QGBYF9MnaXYqpnlCFwFoWx3sP2k-O89F7UgZrgEb8mXoFSW21C1ZNin5EPorvbj5cHerKj6FOPhl0zUSVnDPUj68PlMJZBq-8kYGZvL7w356OJ6MEpYo9RaBsoV5U99vIrlGVCoq2-SoZdSkto0qXXFeoT4JYcjXfec9AN6rXRrmDsbV1S60TvNT2fMrI10KYBco4IKJr9LYAnb2weN9b6eG7ChRuypv5XB3HuwPVkz~PHToTm42S-urAscO5eWk4urx7~3mbxvUN6yrJyHb3Kn2jOsubqta0ntqEPO65HORV0iBUV4v9sPeEBmaH-UaG9ZtGkmdJSvGmW8VFZlaTw__";
-
-// New service images
-export const ANIMATION_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/pCqjlTXcHqDsUToq.png";
-export const PRINT_3D_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/roMLvsRSxiTujDyy.png";
-export const DIGITAL_SOLUTIONS_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/bFPXqCGGrFEzqOMf.png";
-export const VR_TRAINING_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/ubbuyQIdcIzJvMWb.png";
+// Placeholder images: real photography for these services has not been
+// provided yet. Replace the files in client/public/assets/ when available.
+export const SERVICES_3D_URL = "/assets/services-3d.webp";
+export const GAME_DEV_URL = "/assets/game-dev.webp";
+export const OUTSOURCING_URL = "/assets/outsourcing.webp";
+export const PORTFOLIO_URL = "/assets/outsourcing.webp";
+export const ANIMATION_URL = "/assets/animation.webp";
+export const PRINT_3D_URL = "/assets/print-3d.webp";
+export const DIGITAL_SOLUTIONS_URL = "/assets/digital-solutions.webp";
+export const VR_TRAINING_URL = "/assets/vr-training.webp";
 
 export const NAV_ITEMS_PT = [
   { label: "Início", href: "#hero" },
@@ -191,7 +188,7 @@ export const PROJECTS = [
     description: "Neste game você controla os monstros! Proteja seu descanso eterno posicionando hordas de criaturas simpáticas para impedir que aldeões enfurecidos destruam a necrópole.",
     descriptionEn: "In this game you control the monsters! Protect your eternal rest by positioning hordes of friendly creatures to prevent angry villagers from destroying the necropolis.",
     descriptionEs: "¡En este juego controlas los monstruos! Protege tu descanso eterno posicionando hordas de criaturas amigables para evitar que los aldeanos furiosos destruyan la necrópolis.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QAwGxEaluRsgkelB.png",
+    image: "/assets/project-ghouls-next-door.webp",
     status: "Em Desenvolvimento",
     statusEn: "In Development",
     statusEs: "En Desarrollo",
@@ -203,7 +200,7 @@ export const PROJECTS = [
     description: "Uma corrida desesperada pela sobrevivência na linha vicinal abandonada de Paranapiacaba. Entidades sobrenaturais testam sua atenção e coragem em meio à neblina eterna. Cada detalhe importa. Cada erro pode ser seu último.",
     descriptionEn: "A desperate race for survival on the abandoned branch line of Paranapiacaba. Supernatural entities test your attention and courage amid eternal mist. Every detail matters. Every mistake could be your last.",
     descriptionEs: "Una carrera desesperada por la supervivencia en la línea ramal abandonada de Paranapiacaba. Entidades sobrenaturales ponen a prueba tu atención y coraje en medio de la niebla eterna. Cada detalle importa. Cada error podría ser el último.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cOUGJyqspFYMtPWv.png",
+    image: "/assets/project-neblina.webp",
     status: "Em Desenvolvimento",
     statusEn: "In Development",
     statusEs: "En Desarrollo",
@@ -220,7 +217,7 @@ export const PORTFOLIO_WORKS = [
     description: "Criação de assets otimizados com estética 'paper-craft' única para jogos mobile ou indie.",
     descriptionEn: "Creation of optimized assets with unique 'paper-craft' aesthetic for mobile or indie games.",
     descriptionEs: "Creación de assets optimizados con estética 'paper-craft' única para juegos móviles o indie.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/ScbkOfuedSckVuUe.png",
+    image: "/assets/portfolio-viking-lowpoly.webp",
   },
   {
     id: 2,
@@ -231,7 +228,7 @@ export const PORTFOLIO_WORKS = [
     description: "Modelagem facial de alta frequência e texturização de pele para NPCs com personalidade.",
     descriptionEn: "High-frequency facial modeling and skin texturing for NPCs with personality.",
     descriptionEs: "Modelado facial de alta frecuencia y texturización de piel para NPCs con personalidad.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/pqDWxBLWVBKryCnd.png",
+    image: "/assets/portfolio-expressao-goblin.webp",
   },
   {
     id: 3,
@@ -242,7 +239,7 @@ export const PORTFOLIO_WORKS = [
     description: "Renderização de materiais complexos e iluminação atmosférica para cenários de fantasia.",
     descriptionEn: "Rendering of complex materials and atmospheric lighting for fantasy scenarios.",
     descriptionEs: "Renderización de materiales complejos e iluminación atmosférica para escenarios de fantasía.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/QmIqyBmOgliSdapx.png",
+    image: "/assets/portfolio-cavaleiro-marshmallow.webp",
   },
   {
     id: 4,
@@ -253,7 +250,7 @@ export const PORTFOLIO_WORKS = [
     description: "Estudo de personagem com foco em texturização de tecido e madeira. Design carismático pronto para rigging.",
     descriptionEn: "Character study focusing on fabric and wood texturing. Charismatic design ready for rigging.",
     descriptionEs: "Estudio de personaje enfocado en texturización de tela y madera. Diseño carismático listo para rigging.",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663346110288/cZrJzablDiMELNzw.png",
+    image: "/assets/portfolio-mago-estilizado.webp",
   },
 ];
 
