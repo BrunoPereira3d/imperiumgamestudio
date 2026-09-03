@@ -44,7 +44,7 @@ export default function CareersSection() {
         "hiringOrganization": {
           "@type": "Organization",
           "name": "Imperium Game Studio",
-          "sameAs": "https://imperiumgamestudio.com",
+          "sameAs": "https://imperiumgamestudio.com.br",
         },
         "jobLocation": {
           "@type": "Place",
