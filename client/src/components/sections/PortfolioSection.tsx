@@ -3,7 +3,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Maximize2 } from "lucide-react";
+import { Maximize2, Play } from "lucide-react";
 import { PORTFOLIO_WORKS } from "@/lib/constants";
 import ImageLightbox from "@/components/ImageLightbox";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -119,6 +119,15 @@ export default function PortfolioSection() {
                     </span>
                   </div>
 
+                  {/* Video Indicator */}
+                  {work.video && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/30 rounded-full backdrop-blur-sm group-hover:bg-[#C61331]/80 group-hover:border-[#C61331] transition-all duration-300">
+                        <Play size={20} className="text-white ml-0.5" fill="currentColor" />
+                      </div>
+                    </div>
+                  )}
+
                   {/* Description Hover Effect - Slides up from bottom */}
                   <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none translate-y-4 group-hover:translate-y-0">
                     <p className="text-white/90 text-xs leading-relaxed font-[Rajdhani]">
@@ -146,6 +155,7 @@ export default function PortfolioSection() {
       <ImageLightbox
         isOpen={selectedWork !== null}
         imageUrl={PORTFOLIO_WORKS.find(w => w.id === selectedWork)?.image || ""}
+        videoUrl={PORTFOLIO_WORKS.find(w => w.id === selectedWork)?.video}
         title={PORTFOLIO_WORKS.find(w => w.id === selectedWork)?.title || ""}
         onClose={() => setSelectedWork(null)}
       />

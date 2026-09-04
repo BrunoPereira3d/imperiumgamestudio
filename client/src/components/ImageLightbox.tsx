@@ -9,6 +9,7 @@ interface ImageLightboxProps {
   imageUrl: string;
   title: string;
   onClose: () => void;
+  videoUrl?: string;
 }
 
 export default function ImageLightbox({
@@ -16,6 +17,7 @@ export default function ImageLightbox({
   imageUrl,
   title,
   onClose,
+  videoUrl,
 }: ImageLightboxProps) {
   useEffect(() => {
     if (isOpen) {
@@ -62,15 +64,31 @@ export default function ImageLightbox({
                 <X size={32} />
               </button>
 
-              {/* Image */}
-              <motion.img
-                src={imageUrl}
-                alt={title}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
-              />
+              {/* Media */}
+              {videoUrl ? (
+                <motion.video
+                  key={videoUrl}
+                  src={videoUrl}
+                  poster={imageUrl}
+                  controls
+                  autoPlay
+                  loop
+                  playsInline
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+                />
+              ) : (
+                <motion.img
+                  src={imageUrl}
+                  alt={title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+                />
+              )}
 
               {/* Title */}
               <motion.div
