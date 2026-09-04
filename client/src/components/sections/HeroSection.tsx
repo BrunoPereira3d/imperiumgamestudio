@@ -10,7 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 // Extra scroll (in pixels) before the sections below start rising over the
 // Hero. The video and content stay fixed to the viewport for this window.
-const HOLD_PX = 120;
+const HOLD_PX = 250;
 
 export default function HeroSection() {
   const scrollY = useParallax();
