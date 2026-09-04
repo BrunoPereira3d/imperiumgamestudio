@@ -183,7 +183,10 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("telefone")}</div>
-                  <a href="tel:+5511211056" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
+                  <a href="tel:+5511957318258" className="block text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
+                    +55 (11) 95731-8258
+                  </a>
+                  <a href="tel:+5511211056" className="block text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
                     +55 (11) 2110-5658
                   </a>
                 </div>
