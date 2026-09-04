@@ -8,10 +8,6 @@ import { HERO_BG_URL, HERO_BG_VIDEO_URL, LOGO_ICON_URL } from "@/lib/constants";
 import { useParallax } from "@/hooks/useScrollAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Extra scroll (in pixels) before the sections below start rising over the
-// Hero. The video and content stay fixed to the viewport for this window.
-const HOLD_PX = 600;
-
 export default function HeroSection() {
   const scrollY = useParallax();
   const { language } = useLanguage();
@@ -37,9 +33,13 @@ export default function HeroSection() {
   };
 
   // The background stays fixed while the video scrubs across one viewport
-  // height of scroll.
+  // height of scroll. The hold below matches that same distance, so the
+  // sections underneath never start covering the video before it's done
+  // playing — this scales with the visitor's actual screen height instead
+  // of a fixed pixel guess.
   const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
   const heroScroll = Math.min(scrollY, viewportHeight);
+  const HOLD_PX = viewportHeight;
 
   useEffect(() => {
     const video = videoRef.current;
