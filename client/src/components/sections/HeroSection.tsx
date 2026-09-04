@@ -32,10 +32,9 @@ export default function HeroSection() {
     return "Serviços B2B";
   };
 
-  // Cap the parallax drift to roughly one viewport height so the video
-  // never scrolls beyond its overscan buffer while it's still visible
-  // (the fixed background stays in place behind the sections that follow,
-  // until their own opaque background scrolls up and covers it).
+  // Cap the scroll range used to drive the video to roughly one viewport
+  // height (the fixed background stays in place behind the sections that
+  // follow, until their own opaque background scrolls up and covers it).
   const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
   const heroParallaxScroll = Math.min(scrollY, viewportHeight);
 
@@ -51,11 +50,9 @@ export default function HeroSection() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Fixed Parallax Background - stays put behind the page as you scroll */}
-      <div
-        className="fixed inset-0 z-0"
-        style={{ transform: `translateY(${heroParallaxScroll * 0.3}px)` }}
-      >
+      {/* Fixed Background - stays put behind the page as you scroll; the
+          video itself provides the motion via scroll-driven scrubbing above. */}
+      <div className="fixed inset-0 z-0">
         <video
           ref={videoRef}
           src={HERO_BG_VIDEO_URL}
@@ -65,7 +62,7 @@ export default function HeroSection() {
           preload="auto"
           aria-hidden="true"
           onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration)}
-          className="w-full h-[140%] object-cover"
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/35 to-[#0a0a0a]/10" />
       </div>
