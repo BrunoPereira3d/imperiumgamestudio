@@ -8,6 +8,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import { useCursorTrail } from "./hooks/useCursorTrail";
 import WhatsAppButton from "./components/WhatsAppButton";
+import LoadingScreen from "./components/LoadingScreen";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -27,6 +28,7 @@ function App() {
         <LanguageProvider>
           <TooltipProvider>
             <Toaster />
+            <LoadingScreen />
             <Router />
             <WhatsAppButton />
           </TooltipProvider>
