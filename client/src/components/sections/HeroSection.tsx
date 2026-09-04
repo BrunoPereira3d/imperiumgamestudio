@@ -67,7 +67,7 @@ export default function HeroSection() {
           onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration)}
           className="w-full h-[140%] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/35 to-[#0a0a0a]/10" />
       </div>
 
       {/* Diagonal Red Lines */}
