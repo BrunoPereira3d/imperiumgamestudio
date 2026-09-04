@@ -4,9 +4,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Mail, MapPin, Phone, Send, Instagram } from "lucide-react";
-import { toast } from "sonner";
+import { Mail, MapPin, Phone, Instagram } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { CONTACT_EMAIL, buildWhatsAppLink } from "@/lib/constants";
 
 export default function ContactSection() {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -18,7 +18,6 @@ export default function ContactSection() {
     subject: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const getLabel = (key: string) => {
     const labels = {
@@ -47,10 +46,8 @@ export default function ContactSection() {
         seuEmail: "seu@email.com",
         nomeEmpresa: "Nome da empresa (opcional)",
         descrevaSeuProjeto: "Descreva seu projeto ou dúvida...",
-        enviando: "Enviando...",
-        enviarMensagem: "Enviar Mensagem",
-        sucesso: "Mensagem enviada com sucesso! Entraremos em contato em breve.",
-        erro: "Erro ao enviar mensagem. Tente novamente.",
+        enviarEmail: "Enviar por E-mail",
+        enviarWhatsApp: "Enviar por WhatsApp",
       },
       en: {
         contato: "Contact",
@@ -77,10 +74,8 @@ export default function ContactSection() {
         seuEmail: "your@email.com",
         nomeEmpresa: "Company name (optional)",
         descrevaSeuProjeto: "Describe your project or question...",
-        enviando: "Sending...",
-        enviarMensagem: "Send Message",
-        sucesso: "Message sent successfully! We'll get in touch soon.",
-        erro: "Error sending message. Please try again.",
+        enviarEmail: "Send via Email",
+        enviarWhatsApp: "Send via WhatsApp",
       },
       es: {
         contato: "Contacto",
@@ -107,47 +102,43 @@ export default function ContactSection() {
         seuEmail: "tu@email.com",
         nomeEmpresa: "Nombre de la empresa (opcional)",
         descrevaSeuProjeto: "Describe tu proyecto o pregunta...",
-        enviando: "Enviando...",
-        enviarMensagem: "Enviar Mensaje",
-        sucesso: "¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
-        erro: "Error al enviar el mensaje. Intenta de nuevo.",
+        enviarEmail: "Enviar por Correo",
+        enviarWhatsApp: "Enviar por WhatsApp",
       },
     };
     return labels[language][key as keyof typeof labels.pt] || labels.pt[key as keyof typeof labels.pt];
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const buildEmailLink = () => {
+    const subject = formData.subject || getLabel("assunto");
+    const bodyLines = [
+      `${getLabel("nome")}: ${formData.name}`,
+      `${getLabel("emailLabel")}: ${formData.email}`,
+      formData.company ? `${getLabel("empresa")}: ${formData.company}` : null,
+      "",
+      formData.message,
+    ].filter((line) => line !== null);
+    const body = bodyLines.join("\n");
+    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
-    try {
-      // Send email via FormSubmit service (free, no backend needed)
-      const response = await fetch("https://formspree.io/f/xyzqwert", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          subject: formData.subject,
-          message: formData.message,
-          _to: "brunopereira3d@icloud.com",
-        }),
-      });
-
-      if (response.ok) {
-        toast.success(getLabel("sucesso"));
-        setFormData({ name: "", email: "", company: "", subject: "", message: "" });
-      } else {
-        toast.error(getLabel("erro"));
-      }
-    } catch (error) {
-      toast.error(getLabel("erro"));
-    } finally {
-      setIsSubmitting(false);
-    }
+  const buildWhatsAppMessage = () => {
+    const intro =
+      language === "en"
+        ? "New message from the website:"
+        : language === "es"
+          ? "Nuevo mensaje desde el sitio web:"
+          : "Nova mensagem pelo site:";
+    const lines = [
+      intro,
+      `${getLabel("nome")}: ${formData.name}`,
+      `${getLabel("emailLabel")}: ${formData.email}`,
+      formData.company ? `${getLabel("empresa")}: ${formData.company}` : null,
+      formData.subject ? `${getLabel("assunto")}: ${formData.subject}` : null,
+      "",
+      formData.message,
+    ].filter((line) => line !== null);
+    return buildWhatsAppLink(lines.join("\n"));
   };
 
   return (
@@ -180,8 +171,8 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-white font-semibold font-[Rajdhani] tracking-wide">{getLabel("email")}</div>
-                  <a href="mailto:brunopereira3d@icloud.com" className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
-                    brunopereira3d@icloud.com
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="text-white/50 text-sm font-[Rajdhani] hover:text-[#C61331] transition-colors">
+                    {CONTACT_EMAIL}
                   </a>
                 </div>
               </div>
@@ -211,6 +202,22 @@ export default function ContactSection() {
 
             {/* Social */}
             <div className="mt-10 flex gap-3">
+              <a
+                href={buildWhatsAppLink(
+                  language === "en"
+                    ? "Hi! I'd like to talk to Imperium Game Studio."
+                    : language === "es"
+                      ? "¡Hola! Me gustaría hablar con Imperium Game Studio."
+                      : "Olá! Gostaria de falar com a Imperium Game Studio."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 rounded-sm text-white/50 hover:text-[#C61331] hover:border-[#C61331]/30 transition-all duration-300"
+              >
+                <svg className="w-[18px] h-[18px]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.05 22h-.005c-1.836 0-3.633-.462-5.216-1.336l-.373-.211-3.877 1.017 1.036-3.782-.242-.388a10.001 10.001 0 0 1-1.53-5.35c.003-5.514 4.505-9.99 10.05-9.99 2.686 0 5.206 1.043 7.102 2.939a9.94 9.94 0 0 1 2.94 7.055c-.003 5.514-4.503 9.99-9.885 9.99zm8.413-18.36A11.816 11.816 0 0 0 12.05 0C5.495 0 .157 5.29.155 11.792c0 2.079.545 4.106 1.581 5.899L0 24l6.457-1.688a11.86 11.86 0 0 0 5.588 1.404h.005c6.554 0 11.892-5.29 11.895-11.793a11.647 11.647 0 0 0-3.482-8.283z"/>
+                </svg>
+              </a>
               <a
                 href="https://www.instagram.com/imperiumgamestudio/"
                 target="_blank"
@@ -249,7 +256,7 @@ export default function ContactSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit} className="bg-[#111111] border border-white/5 rounded-sm p-8">
+            <form onSubmit={(e) => e.preventDefault()} className="bg-[#111111] border border-white/5 rounded-sm p-8">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-white/60 text-sm font-[Rajdhani] tracking-wider uppercase mb-2">
@@ -329,14 +336,26 @@ export default function ContactSection() {
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="mt-6 w-full bg-[#C61331] text-white py-3 rounded-sm font-bold font-[Orbitron] tracking-wider uppercase hover:bg-[#A00D24] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 group"
-              >
-                <Send size={18} className="group-hover:translate-x-1 transition-transform" />
-                {isSubmitting ? getLabel("enviando") : getLabel("enviarMensagem")}
-              </button>
+              <div className="mt-6 grid sm:grid-cols-2 gap-3">
+                <a
+                  href={buildEmailLink()}
+                  className="w-full bg-[#C61331] text-white py-3 rounded-sm font-bold font-[Orbitron] tracking-wider uppercase hover:bg-[#A00D24] transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <Mail size={18} className="group-hover:translate-x-1 transition-transform" />
+                  {getLabel("enviarEmail")}
+                </a>
+                <a
+                  href={buildWhatsAppMessage()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-[#25D366] text-[#0a0a0a] py-3 rounded-sm font-bold font-[Orbitron] tracking-wider uppercase hover:bg-[#1ebe5a] transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <svg className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.05 22h-.005c-1.836 0-3.633-.462-5.216-1.336l-.373-.211-3.877 1.017 1.036-3.782-.242-.388a10.001 10.001 0 0 1-1.53-5.35c.003-5.514 4.505-9.99 10.05-9.99 2.686 0 5.206 1.043 7.102 2.939a9.94 9.94 0 0 1 2.94 7.055c-.003 5.514-4.503 9.99-9.885 9.99zm8.413-18.36A11.816 11.816 0 0 0 12.05 0C5.495 0 .157 5.29.155 11.792c0 2.079.545 4.106 1.581 5.899L0 24l6.457-1.688a11.86 11.86 0 0 0 5.588 1.404h.005c6.554 0 11.892-5.29 11.895-11.793a11.647 11.647 0 0 0-3.482-8.283z"/>
+                  </svg>
+                  {getLabel("enviarWhatsApp")}
+                </a>
+              </div>
             </form>
           </motion.div>
         </div>

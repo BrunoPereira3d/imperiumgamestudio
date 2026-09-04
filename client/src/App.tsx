@@ -7,7 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import Home from "./pages/Home";
 import { useCursorTrail } from "./hooks/useCursorTrail";
-import Chatbot from "./components/Chatbot";
+import WhatsAppButton from "./components/WhatsAppButton";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -28,7 +28,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <Router />
-            <Chatbot />
+            <WhatsAppButton />
           </TooltipProvider>
         </LanguageProvider>
       </ThemeProvider>

@@ -183,6 +183,18 @@ export const OUTSOURCING_FEATURES = [
 export const PROJECTS = [
   {
     id: 1,
+    title: "Haunted Hype",
+    genre: "Found Footage Horror",
+    description: "Você é um influencer decadente fabricando 'provas' de fantasmas em locações abandonadas para salvar seu canal — usando a própria câmera e microfone para se filmar. A brincadeira vira pesadelo quando eventos sobrenaturais genuínos começam a acontecer, e o que era conteúdo viral se transforma em uma luta real pela sobrevivência.",
+    descriptionEn: "You're a washed-up influencer faking ghost 'evidence' in abandoned locations to save your channel — filming yourself with your own camera and microphone. The act turns into a nightmare when genuinely supernatural events start happening, and what was viral content becomes a real fight for survival.",
+    descriptionEs: "Eres un influencer venido a menos fabricando 'pruebas' de fantasmas en lugares abandonados para salvar tu canal — filmándote con tu propia cámara y micrófono. El acto se convierte en pesadilla cuando empiezan a ocurrir eventos genuinamente sobrenaturales, y lo que era contenido viral se vuelve una lucha real por la supervivencia.",
+    image: "/assets/haunted-hype.webp",
+    status: "Em Desenvolvimento",
+    statusEn: "In Development",
+    statusEs: "En Desarrollo",
+  },
+  {
+    id: 2,
     title: "Ghouls Next Door",
     genre: "Tower Defense",
     description: "Neste game você controla os monstros! Proteja seu descanso eterno posicionando hordas de criaturas simpáticas para impedir que aldeões enfurecidos destruam a necrópole.",
@@ -194,7 +206,7 @@ export const PROJECTS = [
     statusEs: "En Desarrollo",
   },
   {
-    id: 2,
+    id: 3,
     title: "Glitch Rail",
     genre: "Anomaly Finder",
     description: "Uma corrida desesperada pela sobrevivência na linha vicinal abandonada de Paranapiacaba. Entidades sobrenaturais testam sua atenção e coragem em meio à neblina eterna. Cada detalhe importa. Cada erro pode ser seu último.",
@@ -205,19 +217,13 @@ export const PROJECTS = [
     statusEn: "In Development",
     statusEs: "En Desarrollo",
   },
-  {
-    id: 3,
-    title: "Haunted Hype",
-    genre: "Found Footage Horror",
-    description: "Você é um influencer decadente fabricando 'provas' de fantasmas em locações abandonadas para salvar seu canal — usando a própria câmera e microfone para se filmar. A brincadeira vira pesadelo quando eventos sobrenaturais genuínos começam a acontecer, e o que era conteúdo viral se transforma em uma luta real pela sobrevivência.",
-    descriptionEn: "You're a washed-up influencer faking ghost 'evidence' in abandoned locations to save your channel — filming yourself with your own camera and microphone. The act turns into a nightmare when genuinely supernatural events start happening, and what was viral content becomes a real fight for survival.",
-    descriptionEs: "Eres un influencer venido a menos fabricando 'pruebas' de fantasmas en lugares abandonados para salvar tu canal — filmándote con tu propia cámara y micrófono. El acto se convierte en pesadilla cuando empiezan a ocurrir eventos genuinamente sobrenaturales, y lo que era contenido viral se vuelve una lucha real por la supervivencia.",
-    image: "/assets/haunted-hype.webp",
-    status: "Em Desenvolvimento",
-    statusEn: "In Development",
-    statusEs: "En Desarrollo",
-  },
 ];
+
+// Contact channels
+export const CONTACT_EMAIL = "brunopereira@imperiumgamestudio.com";
+export const WHATSAPP_NUMBER = "5511957318258";
+export const buildWhatsAppLink = (message: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
 export const PORTFOLIO_WORKS = [
   {

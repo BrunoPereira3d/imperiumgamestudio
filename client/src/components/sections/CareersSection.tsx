@@ -4,23 +4,16 @@ import { motion } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+import { CONTACT_EMAIL, buildWhatsAppLink } from "@/lib/constants";
 
-const CAREERS_EMAIL = "brunopereira3d@icloud.com";
-
-const buildApplicationMailto = (position: string, language: string) => {
-  const subject =
+const buildApplicationWhatsApp = (position: string, language: string) => {
+  const message =
     language === "en"
-      ? `Application: ${position}`
+      ? `Hi! I'm interested in the ${position} position at Imperium Game Studio. Here's a bit about me:`
       : language === "es"
-        ? `Postulación: ${position}`
-        : `Candidatura: ${position}`;
-  const body =
-    language === "en"
-      ? `Hi Imperium Game Studio team,\n\nI'd like to apply for the ${position} position. Please find my resume attached.\n\nName:\nPhone:\nPortfolio:\n`
-      : language === "es"
-        ? `Hola equipo de Imperium Game Studio,\n\nMe gustaría postularme para la posición de ${position}. Adjunto mi currículum.\n\nNombre:\nTeléfono:\nPortafolio:\n`
-        : `Olá, equipe da Imperium Game Studio,\n\nGostaria de me candidatar à vaga de ${position}. Segue meu currículo em anexo.\n\nNome:\nTelefone:\nPortfólio:\n`;
-  return `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        ? `¡Hola! Estoy interesado en la vacante de ${position} en Imperium Game Studio. Un poco sobre mí:`
+        : `Olá! Tenho interesse na vaga de ${position} na Imperium Game Studio. Um pouco sobre mim:`;
+  return buildWhatsAppLink(message);
 };
 
 export default function CareersSection() {
@@ -318,7 +311,9 @@ export default function CareersSection() {
 
                   {/* CTA Button */}
                   <a
-                    href={buildApplicationMailto(jobData.title, language)}
+                    href={buildApplicationWhatsApp(jobData.title, language)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 w-full bg-[#C61331] hover:bg-[#ff4444] text-white font-[Rajdhani] font-semibold py-3 rounded-sm transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(198,19,49,0.4)]"
                   >
                     {getCandidatar()}
@@ -338,10 +333,10 @@ export default function CareersSection() {
           className="mt-16 text-center"
         >
           <p className="text-white/60 mb-4 font-[Rajdhani]">
-            {getNaoEncontrou()} <span className="text-[#C61331] font-semibold">brunopereira3d@icloud.com</span>
+            {getNaoEncontrou()} <span className="text-[#C61331] font-semibold">{CONTACT_EMAIL}</span>
           </p>
           <a
-            href="mailto:brunopereira3d@icloud.com"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-[#C61331]/50 text-[#C61331] hover:bg-[#C61331]/10 font-[Rajdhani] font-semibold rounded-sm transition-all duration-300"
           >
             {getEnviarCurriculo()}
