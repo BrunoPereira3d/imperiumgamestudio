@@ -7,10 +7,10 @@ import { ChevronDown } from "lucide-react";
 import { HERO_BG_URL, HERO_BG_VIDEO_URL, LOGO_ICON_URL } from "@/lib/constants";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// How much extra scroll (in viewport heights) the hero stays pinned for
-// while the background video scrubs. The sections below only start rising
-// over it once the video has played through VIDEO_RELEASE_FRACTION.
-const EXTRA_SCROLL_VH = 1;
+// How much extra scroll (in pixels) the hero stays pinned for while the
+// background video scrubs. The sections below only start rising over it
+// once the video has played through VIDEO_RELEASE_FRACTION.
+const EXTRA_SCROLL_PX = 600;
 const VIDEO_RELEASE_FRACTION = 0.7;
 
 export default function HeroSection() {
@@ -44,10 +44,8 @@ export default function HeroSection() {
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
-      const viewportHeight = window.innerHeight;
-      const pinnableRange = viewportHeight * EXTRA_SCROLL_VH;
       const scrolled = window.scrollY - section.offsetTop;
-      const progress = pinnableRange > 0 ? Math.min(Math.max(scrolled / pinnableRange, 0), 1) : 0;
+      const progress = Math.min(Math.max(scrolled / EXTRA_SCROLL_PX, 0), 1);
       setPinProgress(progress);
     };
 
@@ -74,7 +72,7 @@ export default function HeroSection() {
       id="hero"
       ref={sectionRef}
       className="relative"
-      style={{ height: `${100 + EXTRA_SCROLL_VH * 100}vh` }}
+      style={{ height: `calc(100vh + ${EXTRA_SCROLL_PX}px)` }}
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Background video - scrubbed by scroll while the section is pinned */}
