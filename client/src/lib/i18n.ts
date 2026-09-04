@@ -70,7 +70,7 @@ export const translations = {
       direitos: "Todos os direitos reservados.",
       slogan: "Forjando experiências digitais",
       propriedade: "PROPRIEDADE INTELECTUAL",
-      propriedadeTexto: "Todas as imagens, personagens, enredos, designs e assets apresentados neste site são propriedade intelectual exclusiva da Imperium Game Studio. O uso não autorizado, cópia, reprodução, modificação ou distribuição de qualquer material aqui contido, sem permissão prévia e expressa por escrito da Imperium Game Studio, é estritamente proibido e sujeitão a ações legais sob as leis de direitos autorais internacionais e locais. \"Ghouls Next Door\", \"Project Neblina\" e o logótipo Imperium são marcas registradas.",
+      propriedadeTexto: "Todas as imagens, personagens, enredos, designs e assets apresentados neste site são propriedade intelectual exclusiva da Imperium Game Studio. O uso não autorizado, cópia, reprodução, modificação ou distribuição de qualquer material aqui contido, sem permissão prévia e expressa por escrito da Imperium Game Studio, é estritamente proibido e sujeitão a ações legais sob as leis de direitos autorais internacionais e locais. \"Ghouls Next Door\", \"Glitch Rail\" e o logótipo Imperium são marcas registradas.",
     },
   },
   en: {
@@ -142,7 +142,7 @@ export const translations = {
       direitos: "All rights reserved.",
       slogan: "Forging digital experiences",
       propriedade: "INTELLECTUAL PROPERTY",
-      propriedadeTexto: "All images, characters, plots, designs and assets presented on this website are exclusive intellectual property of Imperium Game Studio. Unauthorized use, copying, reproduction, modification or distribution of any material contained herein, without prior written permission from Imperium Game Studio, is strictly prohibited and subject to legal action under international and local copyright laws. \"Ghouls Next Door\", \"Project Neblina\" and the Imperium logo are registered trademarks.",
+      propriedadeTexto: "All images, characters, plots, designs and assets presented on this website are exclusive intellectual property of Imperium Game Studio. Unauthorized use, copying, reproduction, modification or distribution of any material contained herein, without prior written permission from Imperium Game Studio, is strictly prohibited and subject to legal action under international and local copyright laws. \"Ghouls Next Door\", \"Glitch Rail\" and the Imperium logo are registered trademarks.",
     },
   },
   es: {
@@ -214,7 +214,7 @@ export const translations = {
       direitos: "Todos los derechos reservados.",
       slogan: "Forjando experiencias digitales",
       propriedade: "PROPIEDAD INTELECTUAL",
-      propriedadeTexto: "Todas las imágenes, personajes, tramas, diseños y activos presentados en este sitio web son propiedad intelectual exclusiva de Imperium Game Studio. El uso no autorizado, copia, reproducción, modificación o distribución de cualquier material contenido aquí, sin permiso previo por escrito de Imperium Game Studio, está estrictamente prohibido y sujeto a acciones legales bajo las leyes de derechos de autor internacionales y locales. \"Ghouls Next Door\", \"Project Neblina\" y el logotipo de Imperium son marcas registradas.",
+      propriedadeTexto: "Todas las imágenes, personajes, tramas, diseños y activos presentados en este sitio web son propiedad intelectual exclusiva de Imperium Game Studio. El uso no autorizado, copia, reproducción, modificación o distribución de cualquier material contenido aquí, sin permiso previo por escrito de Imperium Game Studio, está estrictamente prohibido y sujeto a acciones legales bajo las leyes de derechos de autor internacionales y locales. \"Ghouls Next Door\", \"Glitch Rail\" y el logotipo de Imperium son marcas registradas.",
     },
   },
 };
