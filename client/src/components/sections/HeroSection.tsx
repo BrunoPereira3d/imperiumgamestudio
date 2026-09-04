@@ -1,15 +1,18 @@
 // DESIGN: Cinematic Dark Forge — Full-viewport hero with parallax background
 // Logo with transparent bg, dramatic reveal animation, diagonal red slashes
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { HERO_BG_URL, LOGO_ICON_URL } from "@/lib/constants";
+import { HERO_BG_URL, HERO_BG_VIDEO_URL, LOGO_ICON_URL } from "@/lib/constants";
 import { useParallax } from "@/hooks/useScrollAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
   const scrollY = useParallax();
   const { language } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoDuration, setVideoDuration] = useState(0);
 
   const getTagline = () => {
     if (language === "en") return "Games · 3D · Animation · 3D Printing";
@@ -29,17 +32,40 @@ export default function HeroSection() {
     return "Serviços B2B";
   };
 
+  // Cap the parallax drift to roughly one viewport height so the video
+  // never scrolls beyond its overscan buffer while it's still visible
+  // (the fixed background stays in place behind the sections that follow,
+  // until their own opaque background scrolls up and covers it).
+  const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+  const heroParallaxScroll = Math.min(scrollY, viewportHeight);
+
+  // Scrub the video's playback position directly from scroll progress
+  // (0 to 1 across that same one-viewport-height range), so it advances
+  // as the user scrolls down and reverses as they scroll back up.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoDuration) return;
+    const progress = heroParallaxScroll / viewportHeight;
+    video.currentTime = progress * videoDuration;
+  }, [heroParallaxScroll, viewportHeight, videoDuration]);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Parallax Background */}
+      {/* Fixed Parallax Background - stays put behind the page as you scroll */}
       <div
-        className="absolute inset-0 z-0"
-        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+        className="fixed inset-0 z-0"
+        style={{ transform: `translateY(${heroParallaxScroll * 0.3}px)` }}
       >
-        <img
-          src={HERO_BG_URL}
-          alt="Imperium Game Studio - Estúdio de Desenvolvimento de Games e 3D"
-          className="w-full h-[120%] object-cover"
+        <video
+          ref={videoRef}
+          src={HERO_BG_VIDEO_URL}
+          poster={HERO_BG_URL}
+          muted
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration)}
+          className="w-full h-[140%] object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]" />
       </div>

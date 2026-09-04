@@ -173,7 +173,7 @@ export default function ServicesSection() {
   const content = getContent();
 
   return (
-    <section id="services" className="relative py-32 overflow-hidden">
+    <section id="services" className="relative py-32 bg-[#0a0a0a] overflow-hidden">
       {/* Background accent */}
       <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[#c61331]/[0.02] to-transparent pointer-events-none" />
 

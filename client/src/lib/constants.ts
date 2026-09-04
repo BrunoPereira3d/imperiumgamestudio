@@ -12,6 +12,7 @@ export const LOGO_ORIGINAL_URL = "/assets/logo-stacked.webp";
 export const PRIMARY_COLOR = "#C61331";
 
 export const HERO_BG_URL = "/assets/hero-bg.webp";
+export const HERO_BG_VIDEO_URL = "/assets/hero-bg-video.mp4";
 
 // Placeholder images: real photography for these services has not been
 // provided yet. Replace the files in client/public/assets/ when available.

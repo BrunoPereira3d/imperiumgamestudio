@@ -92,7 +92,7 @@ export default function AboutSection() {
   const content = getContent();
 
   return (
-    <section id="about" className="relative py-32 overflow-hidden">
+    <section id="about" className="relative py-32 bg-[#0a0a0a] overflow-hidden">
       {/* Diagonal accent */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c41e2a]/20 to-transparent" />
 

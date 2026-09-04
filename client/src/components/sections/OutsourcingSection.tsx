@@ -48,7 +48,7 @@ export default function OutsourcingSection() {
   const content = getContent();
 
   return (
-    <section id="outsourcing" className="relative py-32 overflow-hidden">
+    <section id="outsourcing" className="relative py-32 bg-[#0a0a0a] overflow-hidden">
       {/* Background image with heavy overlay */}
       <div className="absolute inset-0 z-0">
         <img
