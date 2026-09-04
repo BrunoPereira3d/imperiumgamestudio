@@ -10,7 +10,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // How much extra scroll (in pixels) the hero stays pinned for while the
 // background video scrubs. The sections below only start rising over it
 // once the video has played through VIDEO_RELEASE_FRACTION.
-const EXTRA_SCROLL_PX = 400;
+const EXTRA_SCROLL_PX = 200;
 const VIDEO_RELEASE_FRACTION = 0.7;
 
 export default function HeroSection() {
@@ -121,7 +121,7 @@ export default function HeroSection() {
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           {/* Logo icon only (controller part) */}
-          <div style={{ opacity: fadeOut(0, 0.25) }}>
+          <div style={{ opacity: fadeOut(0.1, 0.35) }}>
             <motion.div
               initial={{ scale: 0.8, opacity: 0, filter: "blur(20px)" }}
               animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
@@ -137,7 +137,7 @@ export default function HeroSection() {
           </div>
 
           {/* Title text */}
-          <div style={{ opacity: fadeOut(0.05, 0.3) }}>
+          <div style={{ opacity: fadeOut(0.15, 0.4) }}>
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -154,7 +154,7 @@ export default function HeroSection() {
           </div>
 
           {/* Tagline */}
-          <div style={{ opacity: fadeOut(0.1, 0.35) }}>
+          <div style={{ opacity: fadeOut(0.2, 0.45) }}>
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -172,7 +172,7 @@ export default function HeroSection() {
           </div>
 
           {/* CTAs */}
-          <div style={{ opacity: fadeOut(0.15, 0.4) }}>
+          <div style={{ opacity: fadeOut(0.25, 0.5) }}>
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -196,7 +196,7 @@ export default function HeroSection() {
         </div>
 
         {/* Scroll Indicator */}
-        <div style={{ opacity: fadeOut(0, 0.15) }}>
+        <div style={{ opacity: fadeOut(0.1, 0.25) }}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
