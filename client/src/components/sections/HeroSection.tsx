@@ -5,14 +5,20 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { HERO_BG_URL, HERO_BG_VIDEO_URL, LOGO_ICON_URL } from "@/lib/constants";
-import { useParallax } from "@/hooks/useScrollAnimation";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// How much extra scroll (in viewport heights) the hero stays pinned for
+// while the background video scrubs. The sections below only start rising
+// over it once the video has played through VIDEO_RELEASE_FRACTION.
+const EXTRA_SCROLL_VH = 1;
+const VIDEO_RELEASE_FRACTION = 0.7;
+
 export default function HeroSection() {
-  const scrollY = useParallax();
   const { language } = useLanguage();
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoDuration, setVideoDuration] = useState(0);
+  const [pinProgress, setPinProgress] = useState(0);
 
   const getTagline = () => {
     if (language === "en") return "Games · 3D · Animation · 3D Printing";
@@ -32,147 +38,168 @@ export default function HeroSection() {
     return "Serviços B2B";
   };
 
-  // Cap the scroll range used to drive the video to roughly one viewport
-  // height (the fixed background stays in place behind the sections that
-  // follow, until their own opaque background scrolls up and covers it).
-  const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-  const heroParallaxScroll = Math.min(scrollY, viewportHeight);
+  // Track how far the user has scrolled through the hero's extra pinned
+  // height (0 = top of hero, 1 = about to release the pin).
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const viewportHeight = window.innerHeight;
+      const pinnableRange = viewportHeight * EXTRA_SCROLL_VH;
+      const scrolled = window.scrollY - section.offsetTop;
+      const progress = pinnableRange > 0 ? Math.min(Math.max(scrolled / pinnableRange, 0), 1) : 0;
+      setPinProgress(progress);
+    };
 
-  // Scrub the video's playback position directly from scroll progress
-  // (0 to 1 across that same one-viewport-height range), so it advances
-  // as the user scrolls down and reverses as they scroll back up.
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
+  // Scrub the video from 0% to VIDEO_RELEASE_FRACTION as the user scrolls
+  // through the pinned range. Once the pin releases (progress hits 1), the
+  // video stays put at that frame while the sections below rise over it.
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !videoDuration) return;
-    const progress = heroParallaxScroll / viewportHeight;
-    video.currentTime = progress * videoDuration;
-  }, [heroParallaxScroll, viewportHeight, videoDuration]);
+    video.currentTime = pinProgress * VIDEO_RELEASE_FRACTION * videoDuration;
+  }, [pinProgress, videoDuration]);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Fixed Background - stays put behind the page as you scroll; the
-          video itself provides the motion via scroll-driven scrubbing above. */}
-      <div className="fixed inset-0 z-0">
-        <video
-          ref={videoRef}
-          src={HERO_BG_VIDEO_URL}
-          poster={HERO_BG_URL}
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-          onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration)}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/35 via-[#0a0a0a]/10 to-transparent" />
-      </div>
-
-      {/* Diagonal Red Lines */}
-      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-        <motion.div
-          initial={{ x: "-100%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 0.08 }}
-          transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
-          className="absolute top-[20%] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#c41e2a] to-transparent"
-          style={{ transform: "rotate(-5deg) scaleX(1.5)" }}
-        />
-        <motion.div
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 0.06 }}
-          transition={{ duration: 1.5, delay: 1.0, ease: "easeOut" }}
-          className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c41e2a] to-transparent"
-          style={{ transform: "rotate(3deg) scaleX(1.5)" }}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-        {/* Logo icon only (controller part) */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0, filter: "blur(20px)" }}
-          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="flex justify-center"
-        >
-          <img
-            src={LOGO_ICON_URL}
-            alt="Imperium Game Studio"
-            className="w-40 sm:w-48 md:w-56 h-auto drop-shadow-[0_0_60px_rgba(196,30,42,0.4)]"
+    <section
+      id="hero"
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${100 + EXTRA_SCROLL_VH * 100}vh` }}
+    >
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {/* Background video - scrubbed by scroll while the section is pinned */}
+        <div className="absolute inset-0 z-0">
+          <video
+            ref={videoRef}
+            src={HERO_BG_VIDEO_URL}
+            poster={HERO_BG_URL}
+            muted
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+            onLoadedMetadata={(e) => setVideoDuration(e.currentTarget.duration)}
+            className="w-full h-full object-cover"
           />
-        </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/35 via-[#0a0a0a]/10 to-transparent" />
+        </div>
 
-        {/* Title text */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6"
-        >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-[Orbitron] tracking-wider leading-none">
-            IMPERIUM
-          </h1>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl text-white/60 font-[Orbitron] tracking-[0.4em] font-light mt-1">
-            GAME STUDIO
-          </h2>
-        </motion.div>
+        {/* Diagonal Red Lines */}
+        <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+          <motion.div
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={{ x: "0%", opacity: 0.08 }}
+            transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
+            className="absolute top-[20%] left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#c41e2a] to-transparent"
+            style={{ transform: "rotate(-5deg) scaleX(1.5)" }}
+          />
+          <motion.div
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: "0%", opacity: 0.06 }}
+            transition={{ duration: 1.5, delay: 1.0, ease: "easeOut" }}
+            className="absolute top-[60%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#c41e2a] to-transparent"
+            style={{ transform: "rotate(3deg) scaleX(1.5)" }}
+          />
+        </div>
 
-        {/* Tagline */}
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8"
-        >
-          <div className="flex items-center justify-center gap-4 text-white/40">
-            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#c41e2a]/50" />
-            <p className="text-sm sm:text-base md:text-lg font-[Rajdhani] font-light tracking-[0.3em] uppercase">
-              {getTagline()}
-            </p>
-            <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#c41e2a]/50" />
-          </div>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <button
-            onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 bg-[#C61331] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_40px_rgba(198,19,49,0.4)] font-[Rajdhani]"
+        {/* Content */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          {/* Logo icon only (controller part) */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0, filter: "blur(20px)" }}
+            animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="flex justify-center"
           >
-            {getButton1()}
-          </button>
-          <button
-            onClick={() => document.getElementById("outsourcing")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 border border-white/20 text-white/80 font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:border-[#C61331]/50 hover:text-white hover:bg-white/5 font-[Rajdhani]"
+            <img
+              src={LOGO_ICON_URL}
+              alt="Imperium Game Studio"
+              className="w-40 sm:w-48 md:w-56 h-auto drop-shadow-[0_0_60px_rgba(196,30,42,0.4)]"
+            />
+          </motion.div>
+
+          {/* Title text */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6"
           >
-            {getButton2()}
-          </button>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white font-[Orbitron] tracking-wider leading-none">
+              IMPERIUM
+            </h1>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl text-white/60 font-[Orbitron] tracking-[0.4em] font-light mt-1">
+              GAME STUDIO
+            </h2>
+          </motion.div>
+
+          {/* Tagline */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-8"
+          >
+            <div className="flex items-center justify-center gap-4 text-white/40">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#c41e2a]/50" />
+              <p className="text-sm sm:text-base md:text-lg font-[Rajdhani] font-light tracking-[0.3em] uppercase">
+                {getTagline()}
+              </p>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#c41e2a]/50" />
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <button
+              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-8 py-3.5 bg-[#C61331] text-white font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:bg-[#A00D24] hover:shadow-[0_0_40px_rgba(198,19,49,0.4)] font-[Rajdhani]"
+            >
+              {getButton1()}
+            </button>
+            <button
+              onClick={() => document.getElementById("outsourcing")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-8 py-3.5 border border-white/20 text-white/80 font-semibold tracking-wider uppercase text-sm rounded-sm transition-all duration-300 hover:border-[#C61331]/50 hover:text-white hover:bg-white/5 font-[Rajdhani]"
+            >
+              {getButton2()}
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2 text-white/30"
+          >
+            <span className="text-xs tracking-[0.3em] uppercase font-[Rajdhani]">Scroll</span>
+            <ChevronDown size={20} />
+          </motion.div>
         </motion.div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent z-[5]" />
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-white/30"
-        >
-          <span className="text-xs tracking-[0.3em] uppercase font-[Rajdhani]">Scroll</span>
-          <ChevronDown size={20} />
-        </motion.div>
-      </motion.div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent z-[5]" />
     </section>
   );
 }
